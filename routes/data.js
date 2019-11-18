@@ -8,7 +8,6 @@ router.get("/", (req, res, next) => {
   res.render("data/measurements");
 });
 
-
 // manual BPM input
 router.post("/", (req, res, next) => {
   const manualBPM = req.body.manualBPM;
