@@ -1,0 +1,22 @@
+{{!-- <img src="images/heart.png" alt="heart" height="200"> --}}
+<div class="data-options">
+  <div class="arduino-option">
+    <a href="http://localhost:3000/data/arduino">
+      <img src="/images/arduino.png" alt="arduino-logo" height="50">;
+    </a>
+  </div>
+
+  <div class="tap-option">
+    <a href="http://localhost:3000/data/tap">
+      <button type="submit">TAP</button>
+    </a>
+  </div>
+
+  <div class="manual-option">
+    <h3>fill BPM manually</h3>
+    <form action="/data" method="post">
+      <label for="manualBPM">BPM: </label>
+      <input type="text" name="manualBPM" id="manualBPM">
+    </form>
+  </div>
+</div>
