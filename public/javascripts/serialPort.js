@@ -13,46 +13,54 @@ const Readline = serialport.parsers.Readline;
 
 // new port holds the properties held by arduino
 let port = new serialport(portName, {
-  baudRate: 9600,
-  dataBits: 8,
-  parity: "none",
-  stopBits: 1,
-  flowControl: false
+    baudRate: 9600,
+    dataBits: 8,
+    parity: "none",
+    stopBits: 1,
+    flowControl: false
 });
 
 // create a parse element in order to convert data into string
 let parser = port.pipe(
-  new Readline({
-    delimiter: "\n"
-  })
+    new Readline({
+        delimiter: "\n"
+    })
 );
 
-parser.on("data", function(data) {
-  var bits = data;
-  // bits being translater into string
-  readSerialData(bits);
-  console.log(dataHeart);
+parser.on("data", function (data) {
+    var bits = data;
+    // bits being translater into string
+    readSerialData(bits);
+    console.log(dataHeart);
 });
 
-port.on("open", function() {
-  console.log("Open connections!");
+port.on("open", function () {
+    console.log("Open connections!");
 });
 
-port.on("close", function() {
-  console.log("Port is closed.");
+port.on("close", function () {
+    console.log("Port is closed.");
 });
 
-port.on("error", function() {
-  console.log("ERROR: Something went wrong.");
+port.on("error", function () {
+    console.log("ERROR: Something went wrong.");
 });
 
 function readSerialData(data) {
-  // clean data
-  data = data.trim();
+    // clean data
+    data = data.trim();
 
-  // turn into number
-  //
-  // push to data array
-  dataHeart.push(data);
-  console.log("data: " + data);
+    // turn into number
+    data = Number(data);
+
+    // push to data array
+    //dataHeart.push(data);
+    console.log("data: " + data);
+    if (process.send) {
+        process.send(data);
+    }
+    if (dataHeart.length > 5) {
+        console.log(".disconnect()");
+        process.exit();
+    }
 }

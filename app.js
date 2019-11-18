@@ -15,7 +15,7 @@ const flash = require("connect-flash");
 
 
 mongoose
-  .connect('mongodb://localhost/project2', {
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/spotavibe', {
     useNewUrlParser: true
   })
   .then(x => {
