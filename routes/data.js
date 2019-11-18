@@ -30,63 +30,63 @@ router.get("/tap", (req, res, next) => {
   res.render("data/tapexplan.hbs")
 })
 
-
+// arduino option
 router.get("/arduino", (req, res, next) => {
   console.log("redirected to arduino explanation");
   res.render("data/ardunexplan.hbs");
 })
-// router.post("/", (req, res, next) => {
-//       const arduinoPort = req.body.arduinoPort;
-//       // created child for childprocessing Arduino -serialport
-//       // ["/dev/cu.wchusbserial1410"]
-//       let child = cp.fork("serialPort.js", [arduinoPort], {
-//         cwd: "./public/javascripts/",
-//         stdio: ['pipe', 'pipe', 'pipe', 'ipc']
-//       });
 
-//       let heartData = [];
-//       // parent listens to the child
-//       child.on('message', message => {
-//         console.log('message from child:', message);
+router.post("/arduino", (req, res, next) => {
+  const arduinoPort = req.body.arduinoPort;
+  // created child for childprocessing Arduino -serialport ["/dev/cu.wchusbserial1410"]
+  let child = cp.fork("serialPort.js", [arduinoPort], {
+    cwd: "./public/javascripts/",
+    stdio: ['pipe', 'pipe', 'pipe', 'ipc']
+  });
 
-//         // push heartData into array
-//         if (!!Number(message)) {
-//           // correct for outliers by movement
-//           if (message < 110 && message > 55) {
-//             heartData.push(message);
-//           }
-//           // kill child when array is full
-//           if (heartData.length > 12) {
-//             child.send(child.kill())
-//           }
-//         }
+  let heartData = [];
+  // parent listens to the child
+  child.on('message', message => {
+    console.log('message from child:', message);
 
-//         // calculate average BPM
-//         BPM = heartData.reduce((acc, val) => acc + val, 0) / heartData.length;
-//         console.log("average: ", BPM);
+    // push heartData into array
+    if (!!Number(message)) {
+      // correct for outliers by movement
+      if (message < 110 && message > 55) {
+        heartData.push(message);
+      }
+      // kill child when array is full
+      if (heartData.length > 12) {
+        child.send(child.kill())
+      }
+    }
 
-//       });
+    // calculate average BPM
+    BPM = heartData.reduce((acc, val) => acc + val, 0) / heartData.length;
+    console.log("average: ", BPM);
 
-//       // child get killed after arduino finishing running
-//       child.on("exit", () => {
-//         console.log("child terminated!");
-//       });
+  });
 
-//       // find user .findById
-//       //user =req.user._id
+  // child get killed after arduino finishing running
+  child.on("exit", () => {
+    console.log("child terminated!");
+  });
 
-//       HeartRate.create({
-//           BPM: BPM,
-//           date: Date.now,
-//           method: "arduino",
-//           user: req.user._id
-//         }).then(heartrate => {
-//             res.redirect(`/data/${heartrate._id`)
-//   }).catch(err => {
-//      next(err);
-//   })
+  // find user .findById
+  //user =req.user._id
 
-//   res.render("data/newheart");
-// });
+  //     HeartRate.create({
+  //         BPM: BPM,
+  //         date: Date.now,
+  //         method: "arduino",
+  //         user: req.user._id
+  //       }).then(heartrate => {
+  //           res.redirect(`/data/${heartrate._id`)
+  // }).catch(err => {
+  //    next(err);
+  // })
+
+  res.render("data/newheart");
+});
 
 module.exports = router;
