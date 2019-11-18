@@ -4,9 +4,6 @@ const serialport = require("serialport");
 // second argument that is given is the name of the port
 const portName = process.argv[2];
 
-// create empty array
-let dataHeart = [];
-
 // holds data that comes in from the serialport
 // reads until newline character
 const Readline = serialport.parsers.Readline;
@@ -31,7 +28,6 @@ parser.on("data", function (data) {
     var bits = data;
     // bits being translater into string
     readSerialData(bits);
-    console.log(dataHeart);
 });
 
 port.on("open", function () {
@@ -53,14 +49,8 @@ function readSerialData(data) {
     // turn into number
     data = Number(data);
 
-    // push to data array
-    //dataHeart.push(data);
-    console.log("data: " + data);
+    // send data to parent
     if (process.send) {
         process.send(data);
-    }
-    if (dataHeart.length > 5) {
-        console.log(".disconnect()");
-        process.exit();
     }
 }

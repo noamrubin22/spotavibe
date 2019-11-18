@@ -25,7 +25,17 @@ router.post("/", (req, res, next) => {
     // push heartData into array
     if (!!Number(message)) {
       heartData.push(message);
+
+      // kill child when array is full
+      if (heartData.length > 12) {
+        child.send(child.kill())
+      }
     }
+
+    // calculate average BPM
+    const BPM = heartData.reduce((acc, val) => acc + val, 0) / heartData.length;
+    console.log("average: ", BPM);
+
   });
 
   // child get killed after arduino finishing running
