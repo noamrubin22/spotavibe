@@ -12,6 +12,9 @@ const path = require('path');
 const session = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const User = require("./models/User");
 
 
 mongoose
@@ -33,6 +36,41 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+const SpotifyStrategy = require("passport-spotify").Strategy;
+
+passport.use(
+  new SpotifyStrategy(
+    {
+      clientID: process.env.SPOTIFY_CLIENT_ID,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/auth/spotify/callback"
+    },
+    (accessToken, refreshToken, profile, done) => {
+      User.findOne({ spotifyId: profile.id })
+        .then(user => {
+          if (user) {
+            // log the user in
+            done(null, user);
+          } else {
+            return User.create({
+              spotifyId: profile.id
+            })
+              .then(newUser => {
+                // log user in
+                done(null, newUser);
+              });
+          }
+        })
+        .catch(err => {
+          done(err);
+        });
+    }
+  )
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Express View engine setup
 

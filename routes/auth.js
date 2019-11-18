@@ -7,6 +7,19 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
+/* ------------------------------------------------------- SPOTIFY AUTHENTICATION ------------------------------------------------------- */
+// GET /auth/spotify
+router.get('/spotify', passport.authenticate('spotify'))
+
+// GET /auth/spotify/callback
+router.get('/spotify/callback', passport.authenticate("spotify", {
+  failureRedirect: "/",
+  successRedirect: "/"
+  // failureRedirect: "/auth/login",
+})
+)
+
+/* -------------------------------------------------------- LOCAL AUTHENTICATION -------------------------------------------------------- */
 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
@@ -46,12 +59,12 @@ router.post("/signup", (req, res, next) => {
     });
 
     newUser.save()
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch(err => {
-      res.render("auth/signup", { message: "Something went wrong" });
-    })
+      .then(() => {
+        res.redirect("/");
+      })
+      .catch(err => {
+        res.render("auth/signup", { message: "Something went wrong" });
+      })
   });
 });
 

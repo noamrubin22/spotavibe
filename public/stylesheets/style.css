@@ -1,8 +1,48 @@
+* {
+  padding: 0;
+  margin: 0; }
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
   color: #00B7FF; }
+
+h1 {
+  font-size: 50px; }
+
+/* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0; }
+
+.introHead {
+  text-align: center;
+  padding: 20px; }
+
+.introBody {
+  display: flex;
+  align-items: center; }
+
+.introCard {
+  width: 50vw; }
+  .introCard p {
+    padding: 20px; }
+  .introCard .introImages {
+    text-align: center; }
+    .introCard .introImages img {
+      width: 20vw; }
+
+.loginSpotify {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw; }
+  .loginSpotify img {
+    width: 25vw;
+    padding: 20px; }
 
 /*# sourceMappingURL=style.css.map */
