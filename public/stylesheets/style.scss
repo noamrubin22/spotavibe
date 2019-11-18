@@ -6,3 +6,17 @@ body {
 a {
   color: #00B7FF;
 }
+
+.data-options {
+  flex: display;
+  flex-direction: column;
+}
+
+.arduino-option {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.tap-option {
+  padding: 30px;
+}
