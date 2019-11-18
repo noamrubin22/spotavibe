@@ -56,7 +56,9 @@ passport.use(
             done(null, user);
           } else {
             return User.create({
-              spotifyId: profile.id
+              spotifyId: profile.id,
+              userPhoto: profile._json.images[0].url,
+              userJson: profile._json
             })
               .then(newUser => {
                 // log user in
@@ -123,5 +125,8 @@ app.use('/auth', authRoutes);
 
 const measureRoutes = require('./routes/data');
 app.use('/data', measureRoutes);
+
+const profileRoutes = require('./routes/profile');
+app.use('/profile', profileRoutes);
 
 module.exports = app;

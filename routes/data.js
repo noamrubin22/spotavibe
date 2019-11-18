@@ -5,7 +5,8 @@ const cp = require("child_process");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-  res.render("data/measurements");
+  // res.send(req.user)
+  res.render("data/measurements", { user: req.user });
 });
 
 

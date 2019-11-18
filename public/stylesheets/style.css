@@ -3,24 +3,25 @@
   margin: 0; }
 
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
   color: #00B7FF; }
 
-.data-options {
-  flex: display;
-  flex-direction: column; }
-
-.arduino-option {
-  padding-top: 20px;
-  padding-bottom: 20px; }
-
-.tap-option {
-  padding: 30px; }
 h1 {
   font-size: 50px; }
+
+/* ----------------------------------------------------------- LAYOUT STYLING ----------------------------------------------------------- */
+.layout {
+  display: flex; }
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  background-color: greenyellow;
+  width: 15vw;
+  height: 100vh;
+  align-items: center; }
 
 /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
 .intro {
@@ -54,5 +55,17 @@ h1 {
   .loginSpotify img {
     width: 25vw;
     padding: 20px; }
+
+/* ------------------------------------------------------------- DATA PAGES ------------------------------------------------------------- */
+.data-options {
+  flex: display;
+  flex-direction: column; }
+
+.arduino-option {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+.tap-option {
+  padding: 30px; }
 
 /*# sourceMappingURL=style.css.map */
