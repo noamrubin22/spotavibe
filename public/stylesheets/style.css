@@ -3,7 +3,7 @@
   margin: 0; }
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Roboto", sans-serif; }
 
 a {
   color: #00B7FF; }
@@ -18,10 +18,12 @@ h1 {
 .nav {
   display: flex;
   flex-direction: column;
-  background-color: greenyellow;
+  background-image: linear-gradient(to bottom, #DC8665, #EEB462);
   width: 15vw;
   height: 100vh;
-  align-items: center; }
+  align-items: center;
+  justify-content: center;
+  z-index: 2; }
 
 /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
 .intro {
@@ -67,5 +69,16 @@ h1 {
 
 .tap-option {
   padding: 30px; }
+
+/* ------------------------------------------------------------ PLAYLIST PAGE ----------------------------------------------------------- */
+.playlistHeader {
+  margin: 0;
+  width: 85vw;
+  height: 300px;
+  z-index: 1;
+  background-image: linear-gradient(to bottom left, #138086, #534666); }
+
+.playlist {
+  margin: 0; }
 
 /*# sourceMappingURL=style.css.map */

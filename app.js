@@ -49,6 +49,7 @@ passport.use(
       callbackURL: "http://localhost:3000/auth/spotify/callback"
     },
     (accessToken, refreshToken, profile, done) => {
+      console.log("ACCESS TOKEN :" + accessToken + "=> END")
       User.findOne({ spotifyId: profile.id })
         .then(user => {
           if (user) {
