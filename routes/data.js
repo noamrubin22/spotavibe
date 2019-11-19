@@ -46,7 +46,7 @@ router.get("/tap", (req, res, next) => {
 })
 
 router.post("/tap", (req, res, next) => {
-  const BPM = req.body.BPM;
+  const BPM = req.body.avgBPM;
   console.log("BPM: ", BPM)
 
   //find user
@@ -118,20 +118,26 @@ router.post("/arduino", (req, res, next) => {
   User.findById(req.user._id)
     .then(user => {
       console.log(user);
-      //add heartrate data to the database
-      HeartRate.create({
-          BPM,
-          date: Date.now(),
-          method: "manual",
-          user
-        }).then(heartrate => {
-          console.log(heartrate);
-          // redirect to personal playlist for heartrate
-          res.render(`data/newheart`)
-        })
-        .catch(err => {
-          next(err);
-        });
+
+      if (!!BPM) {
+        //add heartrate data to the database
+        HeartRate.create({
+            BPM,
+            date: Date.now(),
+            method: "manual",
+            user
+          }).then(heartrate => {
+            console.log(heartrate);
+            // redirect to personal playlist for heartrate
+            res.render(`data/newheart`)
+          })
+          .catch(err => {
+            next(err);
+          });
+      } else {
+        //try again
+        console.log("try again")
+      }
     }).catch(err => {
       next(err);
     });
