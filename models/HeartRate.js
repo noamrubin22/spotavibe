@@ -6,12 +6,8 @@ const heartRateSchema = new Schema({
   date: Date,
   method: {
     type: String,
-    enum: ["arduino", "tap", "text-input"]
+    enum: ["arduino", "tap", "manual"]
   },
-  comments: [{
-    type: Schema.Types.ObjectId,
-    ref: "Comment"
-  }],
   user: {
     type: Schema.Types.ObjectId,
     ref: "User"
@@ -19,4 +15,4 @@ const heartRateSchema = new Schema({
 });
 
 const HeartRate = mongoose.model('HeartRate', heartRateSchema);
-module.exports = User;
+module.exports = HeartRate;

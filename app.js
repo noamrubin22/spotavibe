@@ -18,7 +18,9 @@ const User = require("./models/User");
 
 
 mongoose
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost/spotavibe', { useNewUrlParser: true })
+  .connect('mongodb://localhost/spotavibe', {
+    useNewUrlParser: true
+  })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -42,22 +44,23 @@ app.use(cookieParser());
 const SpotifyStrategy = require("passport-spotify").Strategy;
 
 passport.use(
-  new SpotifyStrategy(
-    {
+  new SpotifyStrategy({
       clientID: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
       callbackURL: "http://localhost:3000/auth/spotify/callback"
     },
     (accessToken, refreshToken, profile, done) => {
-      User.findOne({ spotifyId: profile.id })
+      User.findOne({
+          spotifyId: profile.id
+        })
         .then(user => {
           if (user) {
             // log the user in
             done(null, user);
           } else {
             return User.create({
-              spotifyId: profile.id
-            })
+                spotifyId: profile.id
+              })
               .then(newUser => {
                 // log user in
                 done(null, newUser);
@@ -109,7 +112,9 @@ app.use(session({
   secret: 'irongenerator',
   resave: true,
   saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection
+  })
 }))
 app.use(flash());
 require('./passport')(app);

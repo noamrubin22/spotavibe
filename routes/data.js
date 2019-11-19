@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
+const HeartRate = require("../models/HeartRate");
 const cp = require("child_process");
+
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -10,24 +12,66 @@ router.get("/", (req, res, next) => {
 
 // manual BPM input
 router.post("/", (req, res, next) => {
-  const manualBPM = req.body.manualBPM;
-  console.log("BPM: ", manualBPM)
+  const BPM = req.body.manualBPM;
+  console.log("BPM: ", BPM)
+
   //find user
-  // User.findById({
-  //   user: req.user._id
-  // })
-
-  // create heartbeat
-
-  // redirect to home screen
-  res.render("data/output")
+  User.findById(req.user._id)
+    .then(user => {
+      console.log(user);
+      //add heartrate data to the database
+      HeartRate.create({
+          BPM,
+          date: Date.now(),
+          method: "manual",
+          user
+        }).then(heartrate => {
+          console.log(heartrate);
+          // redirect to personal playlist for heartrate
+          res.render("data/output")
+        })
+        .catch(err => {
+          next(err);
+        });
+    }).catch(err => {
+      next(err);
+    });
 })
 
 // tap option
 router.get("/tap", (req, res, next) => {
   console.log("tap option clicked")
+
   res.render("data/tapexplan.hbs")
 })
+
+router.post("/tap", (req, res, next) => {
+  const BPM = req.body.BPM;
+  console.log("BPM: ", BPM)
+
+  //find user
+  User.findById(req.user._id)
+    .then(user => {
+      console.log(user);
+      //add heartrate data to the database
+      HeartRate.create({
+          BPM,
+          date: Date.now(),
+          method: "tap",
+          user
+        }).then(heartrate => {
+          console.log(heartrate);
+          // redirect to personal playlist for heartrate
+          res.render("data/output")
+        })
+        .catch(err => {
+          next(err);
+        });
+    }).catch(err => {
+      next(err);
+    });
+})
+
 
 // arduino option
 router.get("/arduino", (req, res, next) => {
@@ -71,21 +115,26 @@ router.post("/arduino", (req, res, next) => {
     console.log("child terminated!");
   });
 
-  // find user .findById
-  //user =req.user._id
-
-  //     HeartRate.create({
-  //         BPM: BPM,
-  //         date: Date.now,
-  //         method: "arduino",
-  //         user: req.user._id
-  //       }).then(heartrate => {
-  //           res.redirect(`/data/${heartrate._id`)
-  // }).catch(err => {
-  //    next(err);
-  // })
-
-  res.render("data/newheart");
-});
+  User.findById(req.user._id)
+    .then(user => {
+      console.log(user);
+      //add heartrate data to the database
+      HeartRate.create({
+          BPM,
+          date: Date.now(),
+          method: "manual",
+          user
+        }).then(heartrate => {
+          console.log(heartrate);
+          // redirect to personal playlist for heartrate
+          res.render(`data/newheart`)
+        })
+        .catch(err => {
+          next(err);
+        });
+    }).catch(err => {
+      next(err);
+    });
+})
 
 module.exports = router;

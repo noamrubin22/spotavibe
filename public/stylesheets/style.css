@@ -24,6 +24,29 @@ h1 {
   font-size: 50px; }
 
 /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
+.progress {
+  height: 30px;
+  width: 200px;
+  position: relative;
+  border: 1px solid black;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  stroke: "green"; }
+  .progress .progress-inner {
+    width: 100%;
+    height: 100%;
+    transition: background 0.2s;
+    top: 0;
+    left: 0; }
+    .progress .progress-inner.green {
+      background: green; }
+
+canvas {
+  width: 160px;
+  height: 160px; }
+
+/* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
 .intro {
   display: flex;
   flex-direction: column;

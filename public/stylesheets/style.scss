@@ -30,6 +30,44 @@ h1 {
   font-size: 50px;
 }
 
+/* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
+// timer
+
+.progress {
+  height: 30px;
+  width: 200px;
+  position: relative;
+  border: 1px solid black;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  stroke: "green";
+
+  .progress-inner {
+    width: 100%;
+    height: 100%;
+    transition: background 0.2s;
+    top: 0;
+    left: 0;
+
+    &.green {
+      background: green;
+    }
+
+    // &.orange {
+    //   background: orange;
+    // }
+
+    // &.red {
+    //   background: red;
+    // }
+  }
+}
+
+canvas {
+  width: 160px;
+  height: 160px;
+}
 
 /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
 
@@ -52,7 +90,7 @@ h1 {
 
 .introCard {
   width: 50vw;
-  
+
   p {
     padding: 20px;
   }
