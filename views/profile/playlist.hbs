@@ -8,10 +8,9 @@
     <div class="playlistBPM col">
       <h3 class="row">Playlist average BPM:</h3>
       <h4 class="row">X BPM</h4>
-      {{!-- <form action="/profile/generate" method="post"> --}}
-      {{!-- <input type="submit" value="Generate Playlist" name="generate"> --}}
-      <button>GENERATE PLAYLIST</button>
-      {{!-- </form> --}}
+      <form action="/profile/playlist" method="post">
+        <button type="submit">GENERATE PLAYLIST</button>
+      </form>
     </div>
   </div>
   <div class="playlist row">
@@ -24,5 +23,5 @@
       <li>Song 5</li>
     </ol>
   </div>
-  <script src="/javascripts/spotify-playlist.js" charset="utf-8"></script>
+  {{!-- <script src="/javascripts/spotify-playlist.js" charset="utf-8"></script> --}}
 </div>
