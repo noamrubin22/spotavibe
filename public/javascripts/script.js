@@ -41,14 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
       lastClick = time;
     }
     lastClick = time;
-    averageBPM = (BPM.reduce((acc, val) => acc + val, 0)) / BPM.length;
+    averageBPM = Math.round((BPM.reduce((acc, val) => acc + val, 0)) / BPM.length);
     // console.log("average: ", averageBPM)
   }
 
   /* visualization timer */
   function progress() {
     // inspired from https://codepen.io/zmuci/pen/rJooKr
-    var speed = 20;
+    var speed = 5;
     var indexPB = speed * 60; // 60 FPS
 
     function tapFunction() {
@@ -75,19 +75,24 @@ document.addEventListener('DOMContentLoaded', () => {
           document.querySelector("body").removeChild(startButton);
           document.querySelector("body").removeChild(tapButton);
         }
-
         // show average BPM 
         let BPMplaceholder = document.createElement("H3");
         BPMplaceholder.setAttribute("id", "avgBPM");
-        document.body.appendChild(BPMplaceholder);
-        let textInput = document.createTextNode(`average BPM: ${Math.round(averageBPM)}`);
+        let textInput = document.createTextNode(`Average BPM : ${averageBPM}`);
         BPMplaceholder.appendChild(textInput);
+        document.body.appendChild(BPMplaceholder);
 
-        // send average BPM by creating a post request
+        // create form for post request
         let formPost = document.createElement("FORM");
         formPost.setAttribute("method", "post");
         formPost.setAttribute("action", "/data/tap");
         document.body.appendChild(formPost);
+
+        let inputPost = document.createElement("INPUT");
+        inputPost.setAttribute("type", "hidden");
+        inputPost.setAttribute("name", "avgBPM");
+        inputPost.setAttribute("value", averageBPM);
+        formPost.appendChild(inputPost);
 
         // create sendbutton for post request
         let sendButton = document.createElement("BUTTON");

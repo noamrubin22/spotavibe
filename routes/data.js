@@ -21,10 +21,10 @@ router.post("/", (req, res, next) => {
       console.log(user);
       //add heartrate data to the database
       HeartRate.create({
-          BPM,
+          BPM: BPM,
           date: Date.now(),
           method: "manual",
-          user
+          user: user
         }).then(heartrate => {
           console.log(heartrate);
           // redirect to personal playlist for heartrate
@@ -46,8 +46,9 @@ router.get("/tap", (req, res, next) => {
 })
 
 router.post("/tap", (req, res, next) => {
-  const BPM = req.body.avgBPM;
+  let BPM = req.body.avgBPM
   console.log("BPM: ", BPM)
+  console.log("got into post")
 
   //find user
   User.findById(req.user._id)
@@ -55,10 +56,10 @@ router.post("/tap", (req, res, next) => {
       console.log(user);
       //add heartrate data to the database
       HeartRate.create({
-          BPM,
+          BPM: BPM,
           date: Date.now(),
           method: "tap",
-          user
+          user: user
         }).then(heartrate => {
           console.log(heartrate);
           // redirect to personal playlist for heartrate
