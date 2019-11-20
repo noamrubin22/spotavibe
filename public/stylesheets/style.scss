@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -21,138 +22,209 @@ h1 {
   display: flex;
 }
 
-.nav {
-  display: flex;
-  flex-direction: column;
-  background-image: linear-gradient(to bottom, #DC8665, #EEB462);
-  width: 150px;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  float: left;
-}
+// .nav {
+  // display: flex;
+  // flex-direction: column;
+  // background-image: linear-gradient(to bottom, #DC8665, #EEB462);
+  // width: 100px;
+  // height: 100vh;
+  // align-items: center;
+  // justify-content: center;
+  // z-index: 2;
+  // float: left;
+// }
 
 .body {
   width: 100%;
 }
-  /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
-  // timer
 
-  .progress {
-    height: 30px;
-    width: 200px;
-    position: relative;
-    border: 1px solid black;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    stroke: "green";
+/* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
+// timer
 
-    .progress-inner {
-      width: 100%;
-      height: 100%;
-      transition: background 0.2s;
-      top: 0;
-      left: 0;
+.progress {
+  height: 30px;
+  width: 200px;
+  position: relative;
+  border: 1px solid black;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  stroke: "green";
 
-      &.green {
-        background: green;
-      }
+  .progress-inner {
+    width: 100%;
+    height: 100%;
+    transition: background 0.2s;
+    top: 0;
+    left: 0;
 
-      // &.orange {
-      //   background: orange;
-      // }
-
-      // &.red {
-      //   background: red;
-      // }
+    &.green {
+      background: green;
     }
   }
+}
 
-  canvas {
-    width: 160px;
-    height: 160px;
-  }
+canvas {
+  width: 160px;
+  height: 160px;
+}
 
-  /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
+/* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
 
-  .intro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-  }
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
 
-  .introHead {
-    text-align: center;
+.introHead {
+  text-align: center;
+  padding: 20px;
+}
+
+.introBody {
+  display: flex;
+  align-items: center;
+}
+
+.introCard {
+  width: 50vw;
+
+  p {
     padding: 20px;
   }
 
-  .introBody {
-    display: flex;
-    align-items: center;
-  }
-
-  .introCard {
-    width: 50vw;
-
-    p {
-      padding: 20px;
-    }
-
-    .introImages {
-      text-align: center;
-
-      img {
-        width: 20vw;
-      }
-    }
-  }
-
-
-  .loginSpotify {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50vw;
+  .introImages {
+    text-align: center;
 
     img {
-      width: 25vw;
-      padding: 20px;
+      width: 20vw;
     }
   }
+}
 
-  /* ------------------------------------------------------------- DATA PAGES ------------------------------------------------------------- */
 
-  .data-options {
-    flex: display;
-    flex-direction: column;
+.loginSpotify {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+
+  img {
+    width: 25vw;
+    padding: 20px;
   }
+}
 
-  .arduino-option {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
+/* ------------------------------------------------------------- DATA PAGES ------------------------------------------------------------- */
 
-  .tap-option {
-    padding: 30px;
-  }
+.data-options {
+  flex: display;
+  flex-direction: column;
+}
 
-  /* ------------------------------------------------------------ PLAYLIST PAGE ----------------------------------------------------------- */
+.arduino-option {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
-  .playlistHeader {
-    margin: 0;
-    height: 300px;
-    width: 100%;
-    // margin-left: 150px;
-    z-index: 1;
-    background-image: linear-gradient(to bottom left, #138086, #534666);
-  }
+.tap-option {
+  padding: 30px;
+}
 
-  .playlist {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+/* ------------------------------------------------------------ PLAYLIST PAGE ----------------------------------------------------------- */
+
+.playlistHeader {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  margin: 0;
+  // height: 300px;
+  width: 100%;
+  // margin-left: 150px;
+  // z-index: 1;
+  background-image: linear-gradient(to bottom left, #138086, #534666);
+}
+
+.playlist {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // where is this? 
+}
+
+.userInfo {
+  display: flex;
+  background-color: pink;
+}
+
+
+.playlist-recommendations {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.playlistBPM {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ------------------------------------------------------------ BOOTSTRAP ---------------------------------------------------------- */
+body {
+  display: flex;
+}
+
+.content-measurements {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center;
+}
+
+.manual-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+.manualBPM {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+.tap-option {
+  background-color: pink;
+  display: flex;
+
+  a {
+    align-content: center;
     align-items: center;
   }
+
+}
+
+.content-chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+#myChart {
+  margin: 4px;
+  padding: 10px 10px;
+
+}

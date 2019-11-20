@@ -16,8 +16,7 @@ router.get('/spotify/callback', passport.authenticate("spotify", {
   failureRedirect: "/",
   successRedirect: "/profile/playlist"
   // failureRedirect: "/auth/login",
-})
-)
+}))
 
 /* ---------------------------------------------------------- LOGOUT OF SPOTIFY --------------------------------------------------------- */
 
@@ -78,7 +77,9 @@ router.post("/signup", (req, res, next) => {
         res.redirect("/");
       })
       .catch(err => {
-        res.render("auth/signup", { message: "Something went wrong" });
+        res.render("auth/signup", {
+          message: "Something went wrong"
+        });
       })
   });
 });

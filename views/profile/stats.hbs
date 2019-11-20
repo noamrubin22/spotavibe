@@ -1,23 +1,44 @@
-<div class="playlistBody">
-  <div class="playlistHeader row" style="background-color:grey;">
-    <div class="profileInfo col" style="background-color: yellow;">
-      <img src={{user.userPhoto}} alt="User's profile photo">
-      <h2>{{user.userJson.display_name}}</h2>
-      <h4>X BPM</h4>
-    </div>
-    <div class="playlistBPM col" style="background-color: yellow;">
-      <h3 class="row">Playlist average BPM:</h3>
-      <h4 class="row">X BPM</h4>
-    </div>
-  </div>
-  <div class="playlist row" style="background-color: beige;">
-    <h3>Our recommendations:</h3>
-    <ol>
-      <li>Song 1</li>
-      <li>Song 2</li>
-      <li>Song 3</li>
-      <li>Song 4</li>
-      <li>Song 5</li>
-    </ol>
-  </div>
+<div class="content-chart">
+  <h1>A view of your BPM over time</h1>
+  <canvas id="myChart"></canvas>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus quaerat veniam laudantium itaque fugiat, modi
+    temporibus quas et doloribus officia laborum consequuntur quisquam pariatur. Ipsa omnis eos veritatis magni libero.
+  </p>
 </div>
+
+{{!-- if chart is empty, motivate to measure --}}
+{{!-- {{#if message}}
+<button>Click to start measuring!</button>
+{{/if}} --}}
+
+{{!-- <script src="/javascripts/utils.js"></script> --}}
+<script>
+  drawBarChart({{{ arrDates }}}, {{{ arrBPM }}});
+
+  function drawBarChart(dates, BPM) {
+
+    var ctx = document.getElementById("myChart").getContext("2d");
+    const drawChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: dates,
+        datasets: [{
+          label: "BPM",
+          data: BPM,
+          backgroundColor: "rgba(255, 159, 64, 0.2)",
+          borderColor: "rgba(255, 159, 64, 1)",
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  } 
+</script>

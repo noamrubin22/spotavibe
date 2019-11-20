@@ -15,6 +15,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/User");
+// const loginCheck = require("../spotavibe/public/javascripts/loginCheck")
 
 
 mongoose
@@ -40,6 +41,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
+// app.use(loginCheck);
 
 const SpotifyStrategy = require("passport-spotify").Strategy;
 
