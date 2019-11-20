@@ -1,8 +1,44 @@
 <div class="content-chart">
+  <h1>A view of your BPM over time</h1>
   <canvas id="myChart"></canvas>
   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus quaerat veniam laudantium itaque fugiat, modi
     temporibus quas et doloribus officia laborum consequuntur quisquam pariatur. Ipsa omnis eos veritatis magni libero.
   </p>
 </div>
 
-<script src="/javascripts/stats.js"></script>
+{{!-- if chart is empty, motivate to measure --}}
+{{!-- {{#if message}}
+<button>Click to start measuring!</button>
+{{/if}} --}}
+
+{{!-- <script src="/javascripts/utils.js"></script> --}}
+<script>
+  drawBarChart({{{ arrDates }}}, {{{ arrBPM }}});
+
+  function drawBarChart(dates, BPM) {
+
+    var ctx = document.getElementById("myChart").getContext("2d");
+    const drawChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: dates,
+        datasets: [{
+          label: "BPM",
+          data: BPM,
+          backgroundColor: "rgba(255, 159, 64, 0.2)",
+          borderColor: "rgba(255, 159, 64, 1)",
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  } 
+</script>

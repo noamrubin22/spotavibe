@@ -3,16 +3,31 @@ const router = express.Router();
 const User = require("../models/User");
 const HeartRate = require("../models/HeartRate");
 const cp = require("child_process");
+// const loginCheck = require("../public/javascripts/loginCheck")
+// let loginCheck;
 let BPM;
 
+const loginCheck = () => {
+  return (req, res, next) => {
+    if (req.user) {
+      next();
+    } else {
+      res.redirect("/");
+    }
+  };
+};
+
 /* GET home page */
-router.get("/", (req, res, next) => {
+router.get("/", loginCheck(), (req, res, next) => {
   // res.send(req.user)
-  res.render("data/measurements", { user: req.user });
+  res.render("data/measurements", {
+    user: req.user
+  });
 });
 
+
 // manual BPM input
-router.post("/", (req, res, next) => {
+router.post("/", loginCheck(), (req, res, next) => {
   const BPM = req.body.manualBPM;
   console.log("BPM: ", BPM)
 
@@ -40,13 +55,13 @@ router.post("/", (req, res, next) => {
 })
 
 // tap option
-router.get("/tap", (req, res, next) => {
+router.get("/tap", loginCheck(), (req, res, next) => {
   console.log("tap option clicked")
 
   res.render("data/tapexplan.hbs")
 })
 
-router.post("/tap", (req, res, next) => {
+router.post("/tap", loginCheck(), (req, res, next) => {
   let BPM = req.body.avgBPM
   console.log("BPM: ", BPM)
   console.log("got into post")
@@ -76,12 +91,12 @@ router.post("/tap", (req, res, next) => {
 
 
 // arduino option
-router.get("/arduino", (req, res, next) => {
+router.get("/arduino", loginCheck(), (req, res, next) => {
   console.log("redirected to arduino explanation");
   res.render("data/ardunexplan.hbs");
 })
 
-router.post("/arduino", (req, res, next) => {
+router.post("/arduino", loginCheck(), (req, res, next) => {
   const arduinoPort = req.body.arduinoPort;
   // created child for childprocessing Arduino -serialport ["/dev/cu.wchusbserial1410"]
   let child = cp.fork("serialPort.js", [arduinoPort], {
