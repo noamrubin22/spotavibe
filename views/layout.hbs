@@ -35,21 +35,24 @@
             <li class="nav-item active">
               <a class="nav-link" href="/profile/stats">Stats</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/profile/playlist">Playlist</a>
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Playlists
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">dayone</a>
+                <a class="dropdown-item" href="#">daytwo</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/profile/playlist">Most recent playlist</a>
+              </div>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="/auth/logout">Logout</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/auth/login">Login</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/auth/signup">Signup</a>
-            </li>
+              {{!-- </li>
             <li class="nav-item active">
               <a class="nav-link" href="auth/spotify">Login with Spotify</a>
-            </li>
+            </li> --}}
           </ul>
     </div>
   </div>

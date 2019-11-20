@@ -15,12 +15,20 @@
   <form action="/data/arduino" method="post">
     <label for="arduinoPort">Arduino Port: </label>
     <input type="text" name="arduinoPort" id="arduinoPort" value="/dev/cu.wchusbserial1410">
-    <button type="submit">!!!!Click to start!!!!</button>
+    <button type="submit" class="show-heart">!!!!Click to start!!!!</button>
   </form>
   {{!-- {{#if message}}
 {{message}}
 {{/if}} --}}
   {{!-- <h1 id="BPM"></h1> --}}
   {{!-- <script src="/javascripts/serialPort.js"></script> --}}
-
 </div>
+
+<script>
+
+  document.querySelector(".show-heart").addEventListener("click", () => {
+    document.querySelector(".content").innerHTML = `<div class="lds-heart">
+      <div></div></div>`
+  })
+
+</script>
