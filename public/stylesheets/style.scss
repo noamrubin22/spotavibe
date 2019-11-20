@@ -4,32 +4,38 @@
 }
 
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Roboto", sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
 
-.data-options {
-  flex: display;
-  flex-direction: column;
-}
-
-.arduino-option {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.tap-option {
-  padding: 30px;
-}
-
 h1 {
   font-size: 50px;
 }
 
+/* ----------------------------------------------------------- LAYOUT STYLING ----------------------------------------------------------- */
+
+.layout {
+  display: flex;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(to bottom, #DC8665, #EEB462);
+  width: 150px;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  float: left;
+}
+
+.body {
+  width: 100%;
+}
 
 /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
 
@@ -77,4 +83,38 @@ h1 {
     width: 25vw;
     padding: 20px;
   }
+}
+
+/* ------------------------------------------------------------- DATA PAGES ------------------------------------------------------------- */
+
+.data-options {
+  flex: display;
+  flex-direction: column;
+}
+
+.arduino-option {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.tap-option {
+  padding: 30px;
+}
+
+/* ------------------------------------------------------------ PLAYLIST PAGE ----------------------------------------------------------- */
+
+.playlistHeader {
+  margin: 0;
+  height: 300px;
+  width: 100%;
+  // margin-left: 150px;
+  z-index: 1;
+  background-image: linear-gradient(to bottom left, #138086, #534666);
+}
+
+.playlist {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

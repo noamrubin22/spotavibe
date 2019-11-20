@@ -5,6 +5,8 @@ const userSchema = new Schema({
   username: String,
   password: String,
   spotifyId: String,
+  userPhoto: String,
+  userJson: Object,
   heartrate: [{ type: Schema.Types.ObjectId, ref: 'HeartRate' }]
 }, {
   timestamps: {
@@ -15,3 +17,5 @@ const userSchema = new Schema({
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
+
+// new url test git

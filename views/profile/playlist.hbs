@@ -1,0 +1,27 @@
+<div class="playlistBody">
+  <div class="playlistHeader row">
+    <div class="userInfo col">
+      <img src={{user.userPhoto}} alt="User's profile photo">
+      <h2>{{user.userJson.display_name}}</h2>
+      <h4>X BPM</h4>
+    </div>
+    <div class="playlistBPM col">
+      <h3 class="row">Playlist average BPM:</h3>
+      <h4 class="row">X BPM</h4>
+      <form action="/profile/playlist" method="post">
+        <button type="submit">GENERATE PLAYLIST</button>
+      </form>
+    </div>
+  </div>
+  <div class="playlist row">
+    <h3>Our recommendations:</h3>
+    <ol>
+      <li>Song 1</li>
+      <li>Song 2</li>
+      <li>Song 3</li>
+      <li>Song 4</li>
+      <li>Song 5</li>
+    </ol>
+  </div>
+  {{!-- <script src="/javascripts/spotify-playlist.js" charset="utf-8"></script> --}}
+</div>

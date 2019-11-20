@@ -49,6 +49,7 @@ passport.use(
       callbackURL: "http://localhost:3000/auth/spotify/callback"
     },
     (accessToken, refreshToken, profile, done) => {
+      console.log("ACCESS TOKEN :" + accessToken + "=> END")
       User.findOne({ spotifyId: profile.id })
         .then(user => {
           if (user) {
@@ -56,7 +57,9 @@ passport.use(
             done(null, user);
           } else {
             return User.create({
-              spotifyId: profile.id
+              spotifyId: profile.id,
+              userPhoto: profile._json.images[0].url,
+              userJson: profile._json
             })
               .then(newUser => {
                 // log user in
@@ -123,5 +126,8 @@ app.use('/auth', authRoutes);
 
 const measureRoutes = require('./routes/data');
 app.use('/data', measureRoutes);
+
+const profileRoutes = require('./routes/profile');
+app.use('/profile', profileRoutes);
 
 module.exports = app;
