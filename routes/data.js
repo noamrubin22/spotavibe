@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
+const HeartRate = require("../models/HeartRate");
 const cp = require("child_process");
+let BPM;
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -11,24 +13,67 @@ router.get("/", (req, res, next) => {
 
 // manual BPM input
 router.post("/", (req, res, next) => {
-  const manualBPM = req.body.manualBPM;
-  console.log("BPM: ", manualBPM)
+  const BPM = req.body.manualBPM;
+  console.log("BPM: ", BPM)
+
   //find user
-  // User.findById({
-  //   user: req.user._id
-  // })
-
-  // create heartbeat
-
-  // redirect to home screen
-  res.render("data/output")
+  User.findById(req.user._id)
+    .then(user => {
+      console.log(user);
+      //add heartrate data to the database
+      HeartRate.create({
+          BPM: BPM,
+          date: Date.now(),
+          method: "manual",
+          user: user
+        }).then(heartrate => {
+          console.log(heartrate);
+          // redirect to personal playlist for heartrate
+          res.render("data/output")
+        })
+        .catch(err => {
+          next(err);
+        });
+    }).catch(err => {
+      next(err);
+    });
 })
 
 // tap option
 router.get("/tap", (req, res, next) => {
   console.log("tap option clicked")
+
   res.render("data/tapexplan.hbs")
 })
+
+router.post("/tap", (req, res, next) => {
+  let BPM = req.body.avgBPM
+  console.log("BPM: ", BPM)
+  console.log("got into post")
+
+  //find user
+  User.findById(req.user._id)
+    .then(user => {
+      console.log(user);
+      //add heartrate data to the database
+      HeartRate.create({
+          BPM: BPM,
+          date: Date.now(),
+          method: "tap",
+          user: user
+        }).then(heartrate => {
+          console.log(heartrate);
+          // redirect to personal playlist for heartrate
+          res.render("data/output")
+        })
+        .catch(err => {
+          next(err);
+        });
+    }).catch(err => {
+      next(err);
+    });
+})
+
 
 // arduino option
 router.get("/arduino", (req, res, next) => {
@@ -54,39 +99,50 @@ router.post("/arduino", (req, res, next) => {
       // correct for outliers by movement
       if (message < 110 && message > 55) {
         heartData.push(message);
+        console.log(heartData);
       }
       // kill child when array is full
-      if (heartData.length > 12) {
+      if (heartData.length > 20) {
         child.send(child.kill())
+        console.log("kiiiiiiiilllllllll")
+
+        // calculate average BPM
+        BPM = Math.round(heartData.reduce((acc, val) => acc + val, 0) / heartData.length);
+        console.log("average: ", BPM);
+
+        // create heartratemodel for user
+        User.findById(req.user._id)
+          .then(user => {
+            console.log(user);
+
+            if (!!BPM) {
+              //add heartrate data to the database
+              HeartRate.create({
+                  BPM: BPM,
+                  date: Date.now(),
+                  method: "arduino",
+                  user: user
+                }).then(heartrate => {
+                  console.log(heartrate);
+                  // redirect to personal playlist for heartrate? patriick??
+                  res.render(`data/newheart`)
+                })
+                .catch(err => {
+                  next(err);
+                });
+            } else {
+              //try again
+              console.log("try again")
+            }
+          }).catch(err => {
+            next(err);
+          });
       }
     }
-
-    // calculate average BPM
-    BPM = heartData.reduce((acc, val) => acc + val, 0) / heartData.length;
-    console.log("average: ", BPM);
-
-  });
-
-  // child get killed after arduino finishing running
-  child.on("exit", () => {
-    console.log("child terminated!");
-  });
-
-  // find user .findById
-  //user =req.user._id
-
-  //     HeartRate.create({
-  //         BPM: BPM,
-  //         date: Date.now,
-  //         method: "arduino",
-  //         user: req.user._id
-  //       }).then(heartrate => {
-  //           res.redirect(`/data/${heartrate._id`)
-  // }).catch(err => {
-  //    next(err);
-  // })
-
-  res.render("data/newheart");
-});
-
+    // termintate child
+    child.on("exit", () => {
+      console.log("child terminated!");
+    });
+  })
+})
 module.exports = router;
