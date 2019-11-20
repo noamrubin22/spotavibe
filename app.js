@@ -45,25 +45,26 @@ const SpotifyStrategy = require("passport-spotify").Strategy;
 
 passport.use(
   new SpotifyStrategy({
-      clientID: process.env.SPOTIFY_CLIENT_ID,
-      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/spotify/callback"
-    },
+    clientID: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth/spotify/callback"
+  },
     (accessToken, refreshToken, profile, done) => {
       console.log("ACCESS TOKEN :" + accessToken + "=> END")
       User.findOne({
-          spotifyId: profile.id
-        })
+        spotifyId: profile.id
+      })
         .then(user => {
           if (user) {
             // log the user in
             done(null, user);
           } else {
             return User.create({
-                spotifyId: profile.id,
-                userPhoto: profile._json.images[0].url,
-                userJson: profile._json
-              })
+              spotifyId: profile.id,
+              accessToken: accessToken,
+              userPhoto: profile._json.images[0].url,
+              userJson: profile._json
+            })
               .then(newUser => {
                 // log user in
                 done(null, newUser);

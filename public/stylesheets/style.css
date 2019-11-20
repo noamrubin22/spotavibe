@@ -1,38 +1,19 @@
 * {
   padding: 0;
-  margin: 0;
-}
+  margin: 0; }
 
 body {
-  font: 14px "Roboto", sans-serif;
-}
+  font: 14px "Roboto", sans-serif; }
 
 a {
-  color: #00B7FF;
-}
-
-.data-options {
-  flex: display;
-  flex-direction: column;
-}
-
-.arduino-option {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.tap-option {
-  padding: 30px;
-}
+  color: #00B7FF; }
 
 h1 {
-  font-size: 50px;
-}
+  font-size: 50px; }
 
 /* ----------------------------------------------------------- LAYOUT STYLING ----------------------------------------------------------- */
 .layout {
-  display: flex;
-}
+  display: flex; }
 
 .nav {
   display: flex;
@@ -43,12 +24,10 @@ h1 {
   align-items: center;
   justify-content: center;
   z-index: 2;
-  float: left;
-}
+  float: left; }
 
 .body {
-  width: 100%;
-}
+  width: 100%; }
 
 /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
 .progress {
@@ -78,61 +57,45 @@ canvas {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0;
-}
+  padding: 0; }
 
 .introHead {
   text-align: center;
-  padding: 20px;
-}
+  padding: 20px; }
 
 .introBody {
   display: flex;
-  align-items: center;
-}
+  align-items: center; }
 
 .introCard {
-  width: 50vw;
-}
-
-.introCard p {
-  padding: 20px;
-}
-
-.introCard .introImages {
-  text-align: center;
-}
-
-.introCard .introImages img {
-  width: 20vw;
-}
+  width: 50vw; }
+  .introCard p {
+    padding: 20px; }
+  .introCard .introImages {
+    text-align: center; }
+    .introCard .introImages img {
+      width: 20vw; }
 
 .loginSpotify {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50vw;
-}
-
-.loginSpotify img {
-  width: 25vw;
-  padding: 20px;
-}
+  width: 50vw; }
+  .loginSpotify img {
+    width: 25vw;
+    padding: 20px; }
 
 /* ------------------------------------------------------------- DATA PAGES ------------------------------------------------------------- */
 .data-options {
   flex: display;
-  flex-direction: column;
-}
+  flex-direction: column; }
 
 .arduino-option {
   padding-top: 20px;
-  padding-bottom: 20px;
-}
+  padding-bottom: 20px; }
 
 .tap-option {
-  padding: 30px;
-}
+  padding: 30px; }
 
 /* ------------------------------------------------------------ PLAYLIST PAGE ----------------------------------------------------------- */
 .playlistHeader {
@@ -140,14 +103,12 @@ canvas {
   height: 300px;
   width: 100%;
   z-index: 1;
-  background-image: linear-gradient(to bottom left, #138086, #534666);
-}
+  background-image: linear-gradient(to bottom left, #138086, #534666); }
 
 .playlist {
   margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
+  align-items: center; }
 
 /*# sourceMappingURL=style.css.map */

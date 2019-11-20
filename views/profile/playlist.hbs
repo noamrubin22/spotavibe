@@ -3,7 +3,7 @@
     <div class="userInfo col">
       <img src={{user.userPhoto}} alt="User's profile photo">
       <h2>{{user.userJson.display_name}}</h2>
-      <h4>X BPM</h4>
+      <h4>BPM measured = {{heartrateData.BPM}}</h4>
     </div>
     <div class="playlistBPM col">
       <h3 class="row">Playlist average BPM:</h3>
@@ -15,13 +15,17 @@
   </div>
   <div class="playlist row">
     <h3>Our recommendations:</h3>
-    <ol>
-      <li>Song 1</li>
-      <li>Song 2</li>
-      <li>Song 3</li>
-      <li>Song 4</li>
-      <li>Song 5</li>
-    </ol>
+    <div>
+      {{#each playlistArr}}
+      <div class="trackBlock row">
+        <h4 class="trackTitle">{{this.name}}</h4>
+        <audio controls src="{{this.preview_url}}" class="trackControls">
+          Your browser does not support the
+          <code>audio</code> element.
+        </audio>
+      </div>
+      {{/each}}
+    </div>
   </div>
   {{!-- <script src="/javascripts/spotify-playlist.js" charset="utf-8"></script> --}}
 </div>

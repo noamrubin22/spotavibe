@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User");
 const HeartRate = require("../models/HeartRate");
 const cp = require("child_process");
+const axios = require('axios');
 let BPM;
 
 /* GET home page */
@@ -11,7 +12,24 @@ router.get("/", (req, res, next) => {
   res.render("data/measurements", { user: req.user });
 });
 
-// manual BPM input
+/* ------------------------------------------------------- GENERATING THE PLAYLIST ------------------------------------------------------ */
+
+const generatePlaylist = async (bpm, genres, accessToken) => {
+  return await axios({
+    method: 'get',
+    url: "https://api.spotify.com/v1/recommendations",
+    headers: { Authorization: 'Bearer ' + accessToken },
+    params: {
+      limit: 5,
+      seed_genres: genres,
+      market: 'from_token',
+      tempo: bpm
+    }
+  })
+}
+
+/* ---------------------------------------------------------- manual BPM input ---------------------------------------------------------- */
+
 router.post("/", (req, res, next) => {
   const BPM = req.body.manualBPM;
   console.log("BPM: ", BPM)
@@ -22,14 +40,23 @@ router.post("/", (req, res, next) => {
       console.log(user);
       //add heartrate data to the database
       HeartRate.create({
-          BPM: BPM,
-          date: Date.now(),
-          method: "manual",
-          user: user
-        }).then(heartrate => {
-          console.log(heartrate);
-          // redirect to personal playlist for heartrate
-          res.render("data/output")
+        BPM: BPM,
+        date: Date.now(),
+        method: "manual",
+        user: user
+      })
+        //Generate the Playlist and push into relevant heartrate model doc
+        .then(heartrate => {
+          generatePlaylist(heartrate.BPM, 'edm', heartrate.user.accessToken)
+            .then(playlist => {
+              HeartRate.findByIdAndUpdate(heartrate._id, { $set: { playlist: playlist.data.tracks } }, { new: true })
+                //Redirect user to Playlist page for the measured heartrate!!!
+                .then(updatedHeartrate => {
+                  console.log("UPDATED HEART RATE>>> " + updatedHeartrate)
+                  res.redirect(`/profile/playlist/${updatedHeartrate._id}`)
+                })
+            })
+            .catch(err => { console.log(err) })
         })
         .catch(err => {
           next(err);
@@ -39,10 +66,10 @@ router.post("/", (req, res, next) => {
     });
 })
 
-// tap option
+/* ------------------------------------------------------------- tap option ------------------------------------------------------------- */
+
 router.get("/tap", (req, res, next) => {
   console.log("tap option clicked")
-
   res.render("data/tapexplan.hbs")
 })
 
@@ -57,15 +84,15 @@ router.post("/tap", (req, res, next) => {
       console.log(user);
       //add heartrate data to the database
       HeartRate.create({
-          BPM: BPM,
-          date: Date.now(),
-          method: "tap",
-          user: user
-        }).then(heartrate => {
-          console.log(heartrate);
-          // redirect to personal playlist for heartrate
-          res.render("data/output")
-        })
+        BPM: BPM,
+        date: Date.now(),
+        method: "tap",
+        user: user
+      }).then(heartrate => {
+        console.log(heartrate);
+        // redirect to personal playlist for heartrate
+        res.render("data/output")
+      })
         .catch(err => {
           next(err);
         });
@@ -75,7 +102,8 @@ router.post("/tap", (req, res, next) => {
 })
 
 
-// arduino option
+/* ----------------------------------------------------------- arduino option ----------------------------------------------------------- */
+
 router.get("/arduino", (req, res, next) => {
   console.log("redirected to arduino explanation");
   res.render("data/ardunexplan.hbs");
@@ -118,15 +146,15 @@ router.post("/arduino", (req, res, next) => {
             if (!!BPM) {
               //add heartrate data to the database
               HeartRate.create({
-                  BPM: BPM,
-                  date: Date.now(),
-                  method: "arduino",
-                  user: user
-                }).then(heartrate => {
-                  console.log(heartrate);
-                  // redirect to personal playlist for heartrate? patriick??
-                  res.render(`data/newheart`)
-                })
+                BPM: BPM,
+                date: Date.now(),
+                method: "arduino",
+                user: user
+              }).then(heartrate => {
+                console.log(heartrate);
+                // redirect to personal playlist for heartrate? patriick??
+                res.render(`data/newheart`)
+              })
                 .catch(err => {
                   next(err);
                 });

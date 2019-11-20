@@ -14,10 +14,17 @@ router.get('/spotify', passport.authenticate('spotify'))
 // GET /auth/spotify/callback
 router.get('/spotify/callback', passport.authenticate("spotify", {
   failureRedirect: "/",
-  successRedirect: "/profile"
+  successRedirect: "/profile/playlist"
   // failureRedirect: "/auth/login",
 })
 )
+
+/* ---------------------------------------------------------- LOGOUT OF SPOTIFY --------------------------------------------------------- */
+
+// router.get("/logout", (req, res) => {
+//   req.logout();
+//   res.redirect("/");
+// });
 
 /* -------------------------------------------------------- LOCAL AUTHENTICATION -------------------------------------------------------- */
 

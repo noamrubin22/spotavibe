@@ -5,6 +5,7 @@ const userSchema = new Schema({
   username: String,
   password: String,
   spotifyId: String,
+  accessToken: String,
   userPhoto: String,
   userJson: Object,
   heartrate: [{ type: Schema.Types.ObjectId, ref: 'HeartRate' }]

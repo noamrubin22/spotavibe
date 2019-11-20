@@ -11,7 +11,8 @@ const heartRateSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User"
-  }
+  },
+  playlist: Array
 });
 
 const HeartRate = mongoose.model('HeartRate', heartRateSchema);
