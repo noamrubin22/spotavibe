@@ -1,24 +1,26 @@
 {{!-- <img src="images/heart.png" alt="heart" height="200"> --}}
-<img src={{user.userPhoto}} alt="User's profile photo">
 
-<div class="data-options">
-  <div class="arduino-option">
-    <a href="http://localhost:3000/data/arduino">
-      <img src="/images/arduino.png" alt="arduino-logo" height="50">;
-    </a>
-  </div>
+<div class="content-measurements">
+  {{!-- <img src={{user.userPhoto}} alt="User's profile photo"> --}}
 
-  <div class="tap-option">
-    <a href="http://localhost:3000/data/tap">
-      <button type="submit">TAP</button>
-    </a>
-  </div>
+  <div class="data-options">
+    <div class="arduino-option">
+      <a href="http://localhost:3000/data/arduino">
+        <img src="/images/arduino.png" alt="arduino-logo" height="50">;
+      </a>
+    </div>
 
-  <div class="manual-option">
-    <h3>fill BPM manually</h3>
-    <form action="/data" method="post">
-      <label for="manualBPM">BPM: </label>
-      <input type="text" name="manualBPM" id="manualBPM">
-    </form>
+    <div class="tap-option">
+      <a href="http://localhost:3000/data/tap">
+        <button type="submit">TAP</button>
+      </a>
+    </div>
+
+    <div class="manual-option">
+      <form action="/data" method="post" class="manualBPM">
+        <label for="manualBPM">BPM: </label>
+        <input type="text" name="manualBPM" id="manualBPM">
+      </form>
+    </div>
   </div>
 </div>

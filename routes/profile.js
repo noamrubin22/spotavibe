@@ -6,19 +6,25 @@ const axios = require('axios')
 //const generatePlaylist = require('../public/javascripts/spotify-playlist')
 
 
-router.get('/', (req, res, next) => {
-  res.render('profile/stats.hbs', { user: req.user })
+router.get('/stats', (req, res, next) => {
+  res.render('profile/stats.hbs', {
+    user: req.user
+  })
 })
 
 router.get('/playlist', (req, res, next) => {
-  res.render('profile/playlist.hbs', { user: req.user })
+  res.render('profile/playlist.hbs', {
+    user: req.user
+  })
 })
 
 const generatePlaylist = async (bpm, genres, accessToken) => {
   return await axios({
     method: 'get',
     url: "https://api.spotify.com/v1/recommendations",
-    headers: { Authorization: 'Bearer ' + accessToken },
+    headers: {
+      Authorization: 'Bearer ' + accessToken
+    },
     params: {
       limit: 5,
       seed_genres: genres,

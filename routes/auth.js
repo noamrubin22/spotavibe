@@ -14,10 +14,9 @@ router.get('/spotify', passport.authenticate('spotify'))
 // GET /auth/spotify/callback
 router.get('/spotify/callback', passport.authenticate("spotify", {
   failureRedirect: "/",
-  successRedirect: "/profile"
+  successRedirect: "/profile/playlist"
   // failureRedirect: "/auth/login",
-})
-)
+}))
 
 /* -------------------------------------------------------- LOCAL AUTHENTICATION -------------------------------------------------------- */
 
@@ -71,7 +70,9 @@ router.post("/signup", (req, res, next) => {
         res.redirect("/");
       })
       .catch(err => {
-        res.render("auth/signup", { message: "Something went wrong" });
+        res.render("auth/signup", {
+          message: "Something went wrong"
+        });
       })
   });
 });
