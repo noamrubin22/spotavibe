@@ -214,3 +214,17 @@ body {
   }
 
 }
+
+.content-chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+#myChart {
+  // margin: 40px;
+  padding: 10px 10px;
+
+}

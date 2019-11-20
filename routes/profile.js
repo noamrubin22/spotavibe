@@ -6,11 +6,21 @@ const axios = require('axios')
 //const generatePlaylist = require('../public/javascripts/spotify-playlist')
 
 
-router.get('/stats', (req, res, next) => {
-  res.render('profile/stats.hbs', {
-    user: req.user
-  })
-})
+router.get("/stats", (req, res, next) => {
+  console.log(req);
+  // find user
+  User.findById(req.user._id)
+    .then(user => {
+      console.log(user);
+
+      // substract heartrates and dates
+      // send to chart -creator
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  res.render("profile/stats");
+});
 
 router.get('/playlist', (req, res, next) => {
   res.render('profile/playlist.hbs', {
