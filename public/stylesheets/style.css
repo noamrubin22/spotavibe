@@ -1,23 +1,47 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box; }
-
-body {
-  font: 14px "Roboto", sans-serif; }
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px; }
 
 a {
   color: #00b7ff; }
 
 h1 {
-  font-size: 50px; }
+  font-size: 50px;
+  font-weight: 600;
+  color: #138085; }
 
-/* ----------------------------------------------------------- LAYOUT STYLING ----------------------------------------------------------- */
-.layout {
+/* ----------------------------------------------------------- LAYOUT ----------------------------------------------------------- */
+body {
+  width: 100%;
   display: flex; }
 
-.body {
-  width: 100%; }
+.layout {
+  display: flex;
+  height: 100vh; }
+
+.body-content {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto; }
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 90px 45px; }
+  .navbar .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 400px;
+    padding-top: 50px; }
+    .navbar .navbar-nav li {
+      display: flex; }
+      .navbar .navbar-nav li img {
+        width: 40px; }
 
 /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
 .progress {
@@ -70,10 +94,39 @@ h1 {
   -o-transition: 0.6s ease-in-out left;
   transition: 0.6s ease-in-out left; }
 
-/* ------------------------------------------------------------- DATA PAGES ------------------------------------------------------------- */
+/* ---------------------------------------------------------- MEASUREMENT PAGE ---------------------------------------------------------- */
+.content-measurements {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: greenyellow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center; }
+
+.manual-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center; }
+
+.manualBPM {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center; }
+
+.tap-option {
+  background-color: pink;
+  display: flex; }
+  .tap-option a {
+    align-content: center;
+    align-items: center; }
+
 .data-options {
-  flex: display;
-  flex-direction: column; }
+  display: flex; }
 
 .arduino-option {
   padding-top: 20px;
@@ -116,36 +169,11 @@ h1 {
   justify-content: center;
   align-items: center; }
 
-/* ------------------------------------------------------------ BOOTSTRAP ---------------------------------------------------------- */
-body {
-  display: flex; }
-
-.content-measurements {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  align-content: center; }
-
-.manual-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center; }
-
-.manualBPM {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: center; }
-
-.tap-option {
-  background-color: pink;
-  display: flex; }
-  .tap-option a {
-    align-content: center;
-    align-items: center; }
-
+/* ------------------------------------------------------------- STATS Page ------------------------------------------------------------- */
 .content-chart {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -156,6 +184,7 @@ body {
   margin: 4px;
   padding: 10px 10px; }
 
+/* -------------------------------------------------------- loading arduino page -------------------------------------------------------- */
 .lds-heart {
   display: inline-block;
   position: relative;

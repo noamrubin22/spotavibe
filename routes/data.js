@@ -43,32 +43,17 @@ const generatePlaylist = async (bpm, genres, accessToken) => {
   })
 }
 
-/* ---------------------------------------------------- Generating a NEW Access Token --------------------------------------------------- */
-
-// const generateAccessToken = async (refreshToken) => {
-//   console.log("HELL YEA!")
-
-//   return await axios({
-//     method: 'post',
-//     url: "https://accounts.spotify.com/api/token",
-//     params: {
-//       grant_type: 'refresh_token',
-//       refresh_token: refreshToken
-//     },
-//     headers: {
-//       'Content-Type': 'application/x-www-form-urlencoded',
-//       'Authorization': 'Basic ' + process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET
-//     },
-//   })
-// }
-
 /* ---------------------------------------------------------- manual BPM input ---------------------------------------------------------- */
 
-router.post("/", loginCheck(), (req, res, next) => {
+router.get("/manual", loginCheck(), (req, res, next) => {
+  res.render('data/manualBPM')
+})
+
+router.post("/manual", loginCheck(), (req, res, next) => {
+  console.log(req.body.genre)
   let BPM = req.body.manualBPM;
   let targetBPM = ((Number(BPM) + 60) / 2);
-  console.log("BPM: ", BPM)
-
+  let genre = req.body.dropdown
   //find user
   User.findById(req.user._id)
     .then(user => {
@@ -77,13 +62,14 @@ router.post("/", loginCheck(), (req, res, next) => {
       HeartRate.create({
           BPM: BPM,
           targetBPM: targetBPM,
+          genre: genre,
           date: Date.now(),
           method: "manual",
           user: user
         })
         //Generate the Playlist and push into relevant heartrate model doc
         .then(heartrate => {
-          generatePlaylist(heartrate.BPM, 'edm', req.user.accessToken)
+          generatePlaylist(heartrate.BPM, genre, req.user.accessToken)
             .then(playlist => {
               HeartRate.findByIdAndUpdate(heartrate._id, {
                   $set: {
@@ -127,17 +113,17 @@ router.get("/tapper", loginCheck(), (req, res, next) => {
 router.post("/tapper", loginCheck(), (req, res, next) => {
   let BPM = req.body.avgBPM
   let targetBPM = ((Number(BPM) + 60) / 2);
-  console.log("BPM: ", BPM)
+  let genre = req.body.dropdown
   console.log("got into post")
 
   //find user
   User.findById(req.user._id)
     .then(user => {
-      console.log(user);
       //add heartrate data to the database
       HeartRate.create({
           BPM: BPM,
           targetBPM: targetBPM,
+          genre: genre,
           date: Date.now(),
           method: "tap",
           user: user
@@ -154,7 +140,6 @@ router.post("/tapper", loginCheck(), (req, res, next) => {
                 })
                 //Redirect user to Playlist page for the measured heartrate!!!
                 .then(updatedHeartrate => {
-                  console.log("UPDATED HEART RATE>>> " + updatedHeartrate)
                   res.redirect(`/profile/playlist/${updatedHeartrate._id}`)
                 })
             }).catch(err => {
@@ -179,6 +164,8 @@ router.get("/arduino", loginCheck(), (req, res, next) => {
 router.post("/arduino", loginCheck(), (req, res, next) => {
   console.log("arrived to post arduino")
 
+  // res.render("data/arduino.hbs");
+  let genre = req.body.dropdown
   const arduinoPort = req.body.arduinoPort;
   // created child for childprocessing Arduino -serialport ["/dev/cu.wchusbserial1410"]
   let child = cp.fork("serialPort.js", [arduinoPort], {
@@ -217,6 +204,7 @@ router.post("/arduino", loginCheck(), (req, res, next) => {
             HeartRate.create({
               BPM: BPM,
               targetBPM: targetBPM,
+              genre: genre,
               date: Date.now(),
               method: "arduino",
               user: user
@@ -233,7 +221,6 @@ router.post("/arduino", loginCheck(), (req, res, next) => {
                     })
                     //Redirect user to Playlist page for the measured heartrate!!!
                     .then(updatedHeartrate => {
-                      console.log("UPDATED HEART RATE>>> ", updatedHeartrate)
                       res.redirect(`/profile/playlist/${updatedHeartrate._id}`)
                     })
                 }).catch(err => {
