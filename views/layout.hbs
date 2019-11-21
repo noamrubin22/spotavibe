@@ -65,7 +65,8 @@
         const playlists = response.data
         // loop over playlists of user and create dropdown element in navbar
         playlists.forEach((playlist) => {
-          console.log(playlist._id);
+          console.log(playlist.date);
+          console.log(playlist);
           const dropdownParent = document.querySelector(".dropdown-menu");
           const playlistHolder = document.createElement("A");
           playlistHolder.setAttribute("class", "dropdown-item");
@@ -77,7 +78,10 @@
             playlistHolder.innerHTML = "Most recent playlist"
             dropdownParent.appendChild(playlistHolder);
           } else {
-            playlistHolder.innerHTML = `${playlist._id}`
+            // convert to a nice date format
+            const stringToDate = new Date(playlist.date);
+            let newDate = (stringToDate.getDate()) + "/" + (stringToDate.getMonth() + 1) + "/" + stringToDate.getFullYear();
+            playlistHolder.innerHTML = `${newDate}`
             dropdownParent.appendChild(playlistHolder);
           }
         })

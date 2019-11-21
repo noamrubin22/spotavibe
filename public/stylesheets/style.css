@@ -67,37 +67,32 @@ body {
   height: 160px; }
 
 /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
-.intro {
+.loginSpotify img {
+  width: 20vw;
+  padding: 10px; }
+
+.loginSpotify a {
+  color: inherit; }
+
+.info-index {
+  margin: 20px; }
+
+.carousel-caption {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 0; }
-
-.introHead {
-  text-align: center;
-  padding: 20px; }
-
-.introBody {
-  display: flex;
+  justify-content: center;
+  align-content: center;
   align-items: center; }
+  .carousel-caption img {
+    padding: 30px; }
 
-.introCard {
-  width: 50vw; }
-  .introCard p {
-    padding: 20px; }
-  .introCard .introImages {
-    text-align: center; }
-    .introCard .introImages img {
-      width: 20vw; }
-
-.loginSpotify {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50vw; }
-  .loginSpotify img {
-    width: 25vw;
-    padding: 20px; }
+.carousel-inner > .item {
+  position: relative;
+  display: none;
+  -webkit-transition: 0.6s ease-in-out left;
+  -moz-transition: 0.6s ease-in-out left;
+  -o-transition: 0.6s ease-in-out left;
+  transition: 0.6s ease-in-out left; }
 
 /* ---------------------------------------------------------- MEASUREMENT PAGE ---------------------------------------------------------- */
 .content-measurements {
