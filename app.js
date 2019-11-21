@@ -19,7 +19,7 @@ const User = require("./models/User");
 mongoose.set('useFindAndModify', false);
 
 mongoose
-  .connect('mongodb://localhost/spotavibe', {
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/spotavibe', {
     useNewUrlParser: true
   })
   .then(x => {
@@ -58,7 +58,11 @@ passport.use(
         .then(user => {
           if (user) {
             // update existing user's accessToken to be valid for another HOUR => Then logging the user in
-            return User.findByIdAndUpdate(user._id, { $set: { accessToken: accessToken } }, done(null, user))
+            return User.findByIdAndUpdate(user._id, {
+              $set: {
+                accessToken: accessToken
+              }
+            }, done(null, user))
             // log the user in
             //done(null, user);
           } else {

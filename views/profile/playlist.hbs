@@ -19,22 +19,6 @@
       </div>
     </div>
   </div>
-
-  {{!-- <div class="playlistHeader">
-    <div class="userInfo">
-      <img src={{user.userPhoto}} alt="User's profile photo">
-      <div class="textInfo">
-        <h4>{{user.userJson.display_name}}! We created a playlist just for you based on your measured BPM
-          ({{heartrateData.BPM}}),
-          measured with the {{heartrateData.method}} method. We filtered the songs using a target BPM of
-          {{heartrateData.targetBPM}} </h4>
-        <h2>{{heartrateData.playlistName}}</h2>
-        <form action="/profile/playlist" method="post">
-          <button type="submit">GENERATE PLAYLIST</button>
-        </form>
-      </div>
-    </div>
-  </div> --}}
   <div class="playlist-recommendations">
     <h3>Our recommendations:</h3>
     <div>
@@ -50,8 +34,4 @@
       </div>
       {{/each}}
     </div>
-    {{/each}}
   </div>
-  {{!-- <script src="/javascripts/spotify-playlist.js" charset="utf-8"></script> --}}
-  {{!-- </div> --}}
-</div>

@@ -17,10 +17,10 @@ const loginCheck = () => {
 
 // let arrBPM;
 // let arrDates;
-
+// let measuringMethod;
 /* -------------------------------------------------------- RENDERING STATS PAGE -------------------------------------------------------- */
 
-router.get("/stats", loginCheck(), (req, res, next) => {
+router.get("/stats", loginCheck(), (req, res) => {
 
   // find user
   HeartRate.find({
@@ -28,34 +28,43 @@ router.get("/stats", loginCheck(), (req, res, next) => {
     })
     .then(heartrate => {
       // create empty arrays
-      arrBPM = [];
-      arrDates = [];
+      let arrBPM = [];
+      let arrDates = [];
+      let measuringMethod;
+      let testMeasure = 20;
+      // let measuringMethod;
       heartrate.forEach(el => {
+        // let measuringMethod = el.method
+        console.log("after forEach loop", measuringMethod);
         // extra checks for existance BPM
-        if (!!el.BPM) {
+        if (el.BPM) {
           arrBPM.push(el.BPM)
 
           // turn dates into more readable format
           let newdate = el.date.getDate() + "/" + (el.date.getMonth() + 1) + "/" + el.date.getFullYear();
-          console.log(newdate)
           arrDates.push(newdate);
-          console.log(arrDates);
+
+          if (el.method) {
+            console.log("method found")
+            measuringMethod = el.method;
+          }
         } else {
+          measuringMethod = "none";
           // create button
-          // const mess = 1;
+          console.log("no input")
         }
       })
-    }).then(() =>
       res.render("profile/stats", {
+        measuringMethod: testMeasure,
         arrBPM: JSON.stringify(arrBPM),
         arrDates: JSON.stringify(arrDates),
         user: req.user
-      }))
-    .catch(err => {
+      })
+    }).catch(err => {
       console.log(err);
-    });
+    })
 
-});
+})
 
 router.get('/playlist', loginCheck(), (req, res, next) => {
   res.render('profile/playlist.hbs', {

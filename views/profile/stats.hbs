@@ -11,7 +11,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="stats-chart">
     <canvas id="myChart"></canvas>
     <p>Here are all the BPM measurements and inputs you've made in the past.
@@ -26,11 +26,16 @@
 
 {{!-- <script src="/javascripts/utils.js"></script> --}}
 <script>
-  drawBarChart({{{ arrDates }}}, {{{ arrBPM }}});
 
-  function drawBarChart(dates, BPM) {
+  drawBarChart({{{ arrDates }}}, {{{ arrBPM }}}, {{{ measuringMethod }}});
+
+  function drawBarChart(dates, BPM, method) {
 
     var ctx = document.getElementById("myChart").getContext("2d");
+
+    //if method is 
+    console.log(method)
+
     const drawChart = new Chart(ctx, {
       type: "bar",
       data: {
