@@ -26,11 +26,16 @@
 
 {{!-- <script src="/javascripts/utils.js"></script> --}}
 <script>
-  drawBarChart({{{ arrDates }}}, {{{ arrBPM }}});
 
-  function drawBarChart(dates, BPM) {
+  drawBarChart({{{ arrDates }}}, {{{ arrBPM }}}, {{{ measuringMethod }}});
+
+  function drawBarChart(dates, BPM, method) {
 
     var ctx = document.getElementById("myChart").getContext("2d");
+
+    //if method is 
+    console.log(method)
+
     const drawChart = new Chart(ctx, {
       type: "bar",
       data: {
