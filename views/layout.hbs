@@ -21,6 +21,7 @@
   <div class="layout">
     <div class="container">
 
+
       <nav class="nav">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <a href="/" class="navbar-left"><img src="/images/waves.png" alt="Spotavibe logo" height="auto"
@@ -38,19 +39,10 @@
                 Playlists
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {{#each playlists}}
-                <a class="dropdown-item" href="/profile/playlist/{{playlists._id}}">daytwo</a>
-                {{/each}}
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/profile/playlist">Most recent playlist</a>
               </div>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="/auth/logout">Logout</a>
-              {{!-- </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="auth/spotify">Login with Spotify</a>
-            </li> --}}
           </ul>
     </div>
   </div>
@@ -73,13 +65,31 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script>
-    axios.get("/data/getplaylist")
+    const playlistsCall = axios.get("/data/getplaylist")
       .then(response => {
-        let playlists = response.data;
-        console.log(response.data)
+        const playlists = response.data
+        // loop over playlists of user and create dropdown element in navbar
+        playlists.forEach((playlist) => {
+          console.log(playlist._id);
+          const dropdownParent = document.querySelector(".dropdown-menu");
+          const playlistHolder = document.createElement("A");
+          playlistHolder.setAttribute("class", "dropdown-item");
+          playlistHolder.setAttribute("href", `/profile/playlist/${playlist._id}`);
+
+          // make sure most recent playlist is displayed
+          const lastPlaylistIndex = playlists.length - 1;
+          if (playlists[lastPlaylistIndex] === playlist) {
+            playlistHolder.innerHTML = "Most recent playlist"
+            dropdownParent.appendChild(playlistHolder);
+          } else {
+            playlistHolder.innerHTML = `${playlist._id}`
+            dropdownParent.appendChild(playlistHolder);
+          }
+        })
+        return playlists;
       }).catch(err => {
         console.log(err);
-      })
+      });
   </script>
 </body>
 

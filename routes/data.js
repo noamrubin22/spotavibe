@@ -230,9 +230,7 @@ router.get("/getplaylist", (req, res, next) => {
     })
     .then(found => {
       console.log("foundddddd playlists:", found);
-      res.json(found, {
-        playlists: found
-      })
+      res.json(found);
     }).catch(err => {
       console.log(err)
     })
