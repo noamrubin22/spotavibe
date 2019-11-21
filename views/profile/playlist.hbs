@@ -8,6 +8,7 @@
           ({{heartrateData.BPM}}),
           measured with the {{heartrateData.method}} method. We filtered the songs using a target BPM of
           {{heartrateData.targetBPM}} </h4>
+        <h2>{{heartrateData.playlistName}}</h2>
         <form action="/profile/playlist" method="post">
           <button type="submit">GENERATE PLAYLIST</button>
         </form>
@@ -19,11 +20,13 @@
     <div>
       {{#each playlistArr}}
       <div class="trackBlock row">
-        <h4 class="trackTitle">{{this.name}}</h4>
+        <h4 class="trackTitle"> {{this.name}} </h4>
+        <h5 class="trackArtist">{{ this.artists.0.name }}</h5>
         <audio controls src="{{this.preview_url}}" class="trackControls">
           Your browser does not support the
           <code>audio</code> element.
         </audio>
+        <a href="{{this.external_urls.spotify}}" class="spotifyURL">linkspotify</a>
       </div>
       {{/each}}
     </div>

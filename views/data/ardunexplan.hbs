@@ -6,37 +6,29 @@
       script</a>
   </h3>
 
-
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate voluptates aliquam quaerat quis inventore
-    dolorem
-    doloremque fugiat, rem praesentium eaque et officia magni veniam tempore velit, aperiam enim cum. Dolore?????</p>
-
   <h5>So if it's all clear you are ready for the measurements. The only thing ahead is adding the name of your port that
-    is connected to the Arduino. Make sure you are sitting in a quite place and place your finger on the sensor</h5>
+    is connected to the Arduino. Make sure you are sitting in a quite place and place your finger on the sensor. Be
+    patient as it takes a bit of time for the Arduino to start measuring your heartpulse. The build-in LED light will
+    blink when your heartpulse is detected.</h5>
   <form action="/data/arduino" method="post">
     <h3>Choose a genre</h3>
     <select name="dropdown" id='dropdown'>
       {{!-- being populated via DOM manipulation --}}
     </select>
-    <label for="arduinoPort">Arduino Port: </label>
+    <h3>Add a name to your playlist</h3>
+    <h4>How do you feel?</h4>
+    <input type="text" name="playlistName" id="playlistName">
+    <hr>
+    <h4>Add the name of the port your Arduino is connected to</h4>
     <input type="text" name="arduinoPort" id="arduinoPort" value="/dev/cu.wchusbserial1410">
-    <button type="submit" class="show-heart">!!!!Click to start!!!!</button>
+    {{#if errorMessage}}
+    <div class="error-message">{{ errorMessage }}</div>
+    {{/if}}
+    <button type="submit" class="show-heart">Click to start</button>
   </form>
-  {{!-- {{#if message}}
-{{message}}
-{{/if}} --}}
-  {{!-- <h1 id="BPM"></h1> --}}
-  {{!-- <script src="/javascripts/serialPort.js"></script> --}}
+  <div class="lds-heart">
+    <div></div>
+  </div>`
 </div>
 
-<script>
-
-  {
-    {
-      !--document.querySelector(".show-heart").addEventListener("click", () => {
-        document.querySelector(".content").innerHTML = `<div class="lds-heart">
-      <div></div></div>` --
-      }}
-  });
-
-</script>
+<script src="/javascripts/genres.js"></script>

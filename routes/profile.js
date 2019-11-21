@@ -22,8 +22,8 @@ router.get("/stats", loginCheck(), (req, res, next) => {
 
   // find user
   HeartRate.find({
-    user: req.user._id
-  })
+      user: req.user._id
+    })
     .then(heartrate => {
       // create empty arrays
       arrBPM = [];

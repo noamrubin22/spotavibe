@@ -79,9 +79,7 @@
             dropdownParent.appendChild(playlistHolder);
           } else {
             // convert to a nice date format
-            const stringToDate = new Date(playlist.date);
-            let newDate = (stringToDate.getDate()) + "/" + (stringToDate.getMonth() + 1) + "/" + stringToDate.getFullYear();
-            playlistHolder.innerHTML = `${newDate}`
+            playlistHolder.innerHTML = `${playlist.playlistName}`;
             dropdownParent.appendChild(playlistHolder);
           }
         })
