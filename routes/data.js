@@ -54,15 +54,33 @@ router.post("/manual", loginCheck(), (req, res, next) => {
   let BPM = req.body.manualBPM;
   let targetBPM = ((Number(BPM) + 60) / 2);
   let genre = req.body.dropdown
+  let playlistName = req.body.playlistName
   //find user
   User.findById(req.user._id)
     .then(user => {
-      console.log(user);
+
+      // check if all input is given
+      if (!req.body.manualBPM || !req.body.playlistName) {
+        console.log("no BPM")
+        res.render("data/manualBPM", {
+          errorMessage: "Please enter a BPM and give your playlist a name"
+        });
+        return;
+      }
+
+      if (!Number(req.body.manualBPM)) {
+        res.render("data/manualBPM", {
+          errorMessage: "BPM should be a number"
+        });
+        return;
+      }
+      // console.log(user);
       //add heartrate data to the database
       HeartRate.create({
         BPM: BPM,
         targetBPM: targetBPM,
         genre: genre,
+        playlistName: playlistName,
         date: Date.now(),
         method: "manual",
         user: user
@@ -71,6 +89,7 @@ router.post("/manual", loginCheck(), (req, res, next) => {
         .then(heartrate => {
           generatePlaylist(heartrate.BPM, genre, req.user.accessToken)
             .then(playlist => {
+              res.send(playlist.data.tracks)
               HeartRate.findByIdAndUpdate(heartrate._id, {
                 $set: {
                   playlist: playlist.data.tracks
@@ -114,16 +133,28 @@ router.post("/tapper", loginCheck(), (req, res, next) => {
   let BPM = req.body.avgBPM
   let targetBPM = ((Number(BPM) + 60) / 2);
   let genre = req.body.dropdown
+  let playlistName = req.body.playlistName
   console.log("got into post")
 
   //find user
   User.findById(req.user._id)
     .then(user => {
+
+      // make sure playlist has a name
+      if (!req.body.playlistName) {
+        console.log("noplaylistname")
+        res.render("data/tapper", {
+          errorMessage: "Please give a name to your playlist"
+        });
+        return;
+      }
+
       //add heartrate data to the database
       HeartRate.create({
         BPM: BPM,
         targetBPM: targetBPM,
         genre: genre,
+        playlistName: playlistName,
         date: Date.now(),
         method: "tap",
         user: user
@@ -145,11 +176,15 @@ router.post("/tapper", loginCheck(), (req, res, next) => {
           }).catch(err => {
             console.log(err)
           })
+          .catch(err => {
+            console.log(err)
+          })
       })
         .catch(err => {
           next(err);
         });
-    }).catch(err => {
+    })
+    .catch(err => {
       next(err);
     });
 })
@@ -162,11 +197,27 @@ router.get("/arduino", loginCheck(), (req, res, next) => {
 })
 
 router.post("/arduino", loginCheck(), (req, res, next) => {
-  console.log("arrived to post arduino")
-
-  // res.render("data/arduino.hbs");
+  let playlistName = req.body.playlistName;
   let genre = req.body.dropdown
   const arduinoPort = req.body.arduinoPort;
+
+  // make sure playlist has a name
+  if (!req.body.playlistName) {
+    console.log("noplaylistname")
+    res.render("data/ardunexplan", {
+      errorMessage: "Please give a name to your playlist"
+    });
+    return;
+  }
+
+  // make sure playlist has a name
+  if (!req.body.arduinoPort) {
+    console.log("noplaylistname")
+    res.render("data/ardunexplan", {
+      errorMessage: "Please determine your Arduino port"
+    });
+    return;
+  }
   // created child for childprocessing Arduino -serialport ["/dev/cu.wchusbserial1410"]
   let child = cp.fork("serialPort.js", [arduinoPort], {
     cwd: "./public/javascripts/",
@@ -205,6 +256,7 @@ router.post("/arduino", loginCheck(), (req, res, next) => {
               BPM: BPM,
               targetBPM: targetBPM,
               genre: genre,
+              playlistName: playlistName,
               date: Date.now(),
               method: "arduino",
               user: user

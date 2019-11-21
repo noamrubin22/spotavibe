@@ -5,6 +5,7 @@ const heartRateSchema = new Schema({
   BPM: Number,
   targetBPM: Number,
   genre: String,
+  playlistName: String,
   date: Date,
   method: {
     type: String,
