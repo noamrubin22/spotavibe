@@ -126,11 +126,10 @@ body {
   align-items: center;
   justify-content: space-around;
   align-content: center; }
-  /* .content-measurements h3 {
+  .content-measurements h3 {
     margin: 50px 0;
     color: #138086;
-    font-weight: 800; 
-  } */
+    font-weight: 800; }
 
 .manualBPM {
   display: flex;
@@ -139,26 +138,6 @@ body {
   align-items: center; }
 
 .data-options {
-  display: flex; }
-
-.arduino-option {
-  padding-top: 20px;
-  padding-bottom: 20px; }
-
-.tap-option {
-  padding: 30px; }
-
-.error-message {
-  background: #F02B63;
-  box-sizing: border-box;
-  color: #fff;
-  margin: 20px auto;
-  padding: 20px;
-  width: 100%; 
-}
-
-/* ------------------------------------------------------------ PLAYLIST PAGE ----------------------------------------------------------- */
-.playlistHeader {
   display: flex;
   justify-content: space-between;
   width: 100%; }
@@ -184,6 +163,14 @@ body {
     float: left; }
   .data-options .bpm-option:hover {
     box-shadow: 0 0 15px rgba(33, 33, 33, 0.2); }
+
+.error-message {
+  background: #F02B63;
+  box-sizing: border-box;
+  color: #fff;
+  margin: 20px auto;
+  padding: 20px;
+  width: 100%; }
 
 /* ------------------------------------------------------------ PLAYLIST PAGE ----------------------------------------------------------- */
 .content-playlist {
