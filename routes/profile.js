@@ -22,8 +22,8 @@ router.get("/stats", loginCheck(), (req, res, next) => {
 
   // find user
   HeartRate.find({
-      user: req.user._id
-    })
+    user: req.user._id
+  })
     .then(heartrate => {
       // create empty arrays
       arrBPM = [];
@@ -67,16 +67,15 @@ router.get('/playlist/:heartrateID', (req, res, next) => {
   HeartRate.findById(heartrateID)
     .populate('user')
     .then(heartrateData => {
-      console.log("READY TO POPULATE>>>" + heartrateData)
+      // console.log("READY TO POPULATE>>>" + heartrateData)
       res.render('profile/playlist', {
         playlistArr: heartrateData.playlist,
         heartrateData: heartrateData,
         user: req.user,
-
       })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 

@@ -58,8 +58,10 @@ passport.use(
         })
         .then(user => {
           if (user) {
+            // update existing user's accessToken to be valid for another HOUR => Then logging the user in
+            return User.findByIdAndUpdate(user._id, { $set: { accessToken: accessToken } }, done(null, user))
             // log the user in
-            done(null, user);
+            //done(null, user);
           } else {
             return User.create({
                 spotifyId: profile.id,
