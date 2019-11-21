@@ -4,15 +4,14 @@
     <div class="userInfo">
       <img src={{user.userPhoto}} alt="User's profile photo">
       <div class="textInfo">
-        <h2>{{user.userJson.display_name}}</h2>
-        <h4>BPM measured = {{heartrateData.BPM}}</h4>
+        <h4>{{user.userJson.display_name}}! We created a playlist just for you based on your measured BPM
+          ({{heartrateData.BPM}}),
+          measured with the {{heartrateData.method}} method. We filtered the songs using a target BPM of
+          {{heartrateData.targetBPM}} </h4>
+        <form action="/profile/playlist" method="post">
+          <button type="submit">GENERATE PLAYLIST</button>
+        </form>
       </div>
-    </div>
-    <div class="playlistBPM">
-      <h5>Target BPM = {{heartrateData.targetBPM}}</h5>
-      <form action="/profile/playlist" method="post">
-        <button type="submit">GENERATE PLAYLIST</button>
-      </form>
     </div>
   </div>
   <div class="playlist-recommendations">

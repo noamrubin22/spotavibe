@@ -79,49 +79,60 @@ h1 {
 
 /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
 
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0;
-}
+// .intro {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   padding: 0;
+// }
 
-.introHead {
-  text-align: center;
-  padding: 20px;
-}
+// .introHead {
+//   text-align: center;
+//   padding: 20px;
+// }
 
-.introBody {
-  display: flex;
-  align-items: center;
-}
+// .introBody {
+//   display: flex;
+//   align-items: center;
+// }
 
-.introCard {
-  width: 50vw;
-
-  p {
-    padding: 20px;
-  }
-
-  .introImages {
-    text-align: center;
-
-    img {
-      width: 20vw;
-    }
-  }
-}
 
 .loginSpotify {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50vw;
 
   img {
-    width: 25vw;
-    padding: 20px;
+    width: 20vw;
+    padding: 10px;
   }
+
+  a {
+    color: inherit;
+  }
+}
+
+.info-index {
+  margin: 20px;
+}
+
+.carousel-caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
+  img {
+    padding: 30px;
+  }
+}
+
+// slow down carousel
+.carousel-inner>.item {
+  position: relative;
+  display: none;
+  -webkit-transition: 0.6s ease-in-out left;
+  -moz-transition: 0.6s ease-in-out left;
+  -o-transition: 0.6s ease-in-out left;
+  transition: 0.6s ease-in-out left;
 }
 
 /* ------------------------------------------------------------- DATA PAGES ------------------------------------------------------------- */
@@ -242,6 +253,7 @@ body {
   transform: rotate(45deg);
   transform-origin: 40px 40px;
 }
+
 .lds-heart div {
   top: 32px;
   left: 32px;
@@ -251,6 +263,7 @@ body {
   background: pink;
   animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
 }
+
 .lds-heart div:after,
 .lds-heart div:before {
   content: " ";
@@ -260,30 +273,38 @@ body {
   height: 32px;
   background: pink;
 }
+
 .lds-heart div:before {
   left: -24px;
   border-radius: 50% 0 0 50%;
 }
+
 .lds-heart div:after {
   top: -24px;
   border-radius: 50% 50% 0 0;
 }
+
 @keyframes lds-heart {
   0% {
     transform: scale(0.95);
   }
+
   5% {
     transform: scale(1.1);
   }
+
   39% {
     transform: scale(0.85);
   }
+
   45% {
     transform: scale(1);
   }
+
   60% {
     transform: scale(0.95);
   }
+
   100% {
     transform: scale(0.9);
   }

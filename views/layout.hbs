@@ -16,36 +16,9 @@
 
 <body>
   <div class="layout">
-
-<<<<<<< HEAD
-
-      <nav class="nav">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a href="/" class="navbar-left"><img src="/images/waves.png" alt="Spotavibe logo" height="auto"
-              width="100px"></a>
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/data">Measure <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/profile/stats">Stats</a>
-            </li>
-            <li class="nav-item dropdown active">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Playlists
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              </div>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/auth/logout">Logout</a>
-          </ul>
-    </div>
-=======
     <nav class="nav">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a href="/" class="navbar-left"><img src="/images/LOGO.png" alt="Spotavibe logo" height="auto"
+        <a href="/" class="navbar-left"><img src="/images/waves.png" alt="Spotavibe logo" height="auto"
             width="100px"></a>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -60,23 +33,12 @@
               Playlists
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              {{#each playlists}}
-              <a class="dropdown-item" href="/profile/playlist/{{playlists._id}}">daytwo</a>
-              {{/each}}
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/profile/playlist">Most recent playlist</a>
             </div>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="/auth/logout">Logout</a>
-            {{!-- </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="auth/spotify">Login with Spotify</a>
-            </li> --}}
         </ul>
-      </nav>
-    </nav>
->>>>>>> 29743a9dea537a3a2600489780317158253f2ad0
+  </div>
   </div>
 
   <div class="body">
@@ -99,7 +61,8 @@
         const playlists = response.data
         // loop over playlists of user and create dropdown element in navbar
         playlists.forEach((playlist) => {
-          console.log(playlist._id);
+          console.log(playlist.date);
+          console.log(playlist);
           const dropdownParent = document.querySelector(".dropdown-menu");
           const playlistHolder = document.createElement("A");
           playlistHolder.setAttribute("class", "dropdown-item");
@@ -111,7 +74,10 @@
             playlistHolder.innerHTML = "Most recent playlist"
             dropdownParent.appendChild(playlistHolder);
           } else {
-            playlistHolder.innerHTML = `${playlist._id}`
+            // convert to a nice date format
+            const stringToDate = new Date(playlist.date);
+            let newDate = (stringToDate.getDate()) + "/" + (stringToDate.getMonth() + 1) + "/" + stringToDate.getFullYear();
+            playlistHolder.innerHTML = `${newDate}`
             dropdownParent.appendChild(playlistHolder);
           }
         })

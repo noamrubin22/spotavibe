@@ -75,23 +75,23 @@ router.post("/", loginCheck(), (req, res, next) => {
       console.log(user);
       //add heartrate data to the database
       HeartRate.create({
-        BPM: BPM,
-        targetBPM: targetBPM,
-        date: Date.now(),
-        method: "manual",
-        user: user
-      })
+          BPM: BPM,
+          targetBPM: targetBPM,
+          date: Date.now(),
+          method: "manual",
+          user: user
+        })
         //Generate the Playlist and push into relevant heartrate model doc
         .then(heartrate => {
           generatePlaylist(heartrate.BPM, 'edm', req.user.accessToken)
             .then(playlist => {
               HeartRate.findByIdAndUpdate(heartrate._id, {
-                $set: {
-                  playlist: playlist.data.tracks
-                }
-              }, {
-                new: true
-              })
+                  $set: {
+                    playlist: playlist.data.tracks
+                  }
+                }, {
+                  new: true
+                })
                 //Redirect user to Playlist page for the measured heartrate!!!
                 .then(updatedHeartrate => {
                   // console.log("UPDATED HEART RATE>>> " + updatedHeartrate)
@@ -136,31 +136,31 @@ router.post("/tapper", loginCheck(), (req, res, next) => {
       console.log(user);
       //add heartrate data to the database
       HeartRate.create({
-        BPM: BPM,
-        targetBPM: targetBPM,
-        date: Date.now(),
-        method: "tap",
-        user: user
-      }).then(heartrate => {
-        console.log("created heartrate")
-        generatePlaylist(heartrate.BPM, 'edm', heartrate.user.accessToken)
-          .then(playlist => {
-            HeartRate.findByIdAndUpdate(heartrate._id, {
-              $set: {
-                playlist: playlist.data.tracks
-              }
-            }, {
-              new: true
+          BPM: BPM,
+          targetBPM: targetBPM,
+          date: Date.now(),
+          method: "tap",
+          user: user
+        }).then(heartrate => {
+          console.log("created heartrate")
+          generatePlaylist(heartrate.BPM, 'edm', heartrate.user.accessToken)
+            .then(playlist => {
+              HeartRate.findByIdAndUpdate(heartrate._id, {
+                  $set: {
+                    playlist: playlist.data.tracks
+                  }
+                }, {
+                  new: true
+                })
+                //Redirect user to Playlist page for the measured heartrate!!!
+                .then(updatedHeartrate => {
+                  console.log("UPDATED HEART RATE>>> " + updatedHeartrate)
+                  res.redirect(`/profile/playlist/${updatedHeartrate._id}`)
+                })
+            }).catch(err => {
+              console.log(err)
             })
-              //Redirect user to Playlist page for the measured heartrate!!!
-              .then(updatedHeartrate => {
-                console.log("UPDATED HEART RATE>>> " + updatedHeartrate)
-                res.redirect(`/profile/playlist/${updatedHeartrate._id}`)
-              })
-          }).catch(err => {
-            console.log(err)
-          })
-      })
+        })
         .catch(err => {
           next(err);
         });
@@ -177,7 +177,7 @@ router.get("/arduino", loginCheck(), (req, res, next) => {
 })
 
 router.post("/arduino", loginCheck(), (req, res, next) => {
-  // res.render("data/arduino.hbs");
+  console.log("arrived to post arduino")
 
   const arduinoPort = req.body.arduinoPort;
   // created child for childprocessing Arduino -serialport ["/dev/cu.wchusbserial1410"]
@@ -225,12 +225,12 @@ router.post("/arduino", loginCheck(), (req, res, next) => {
                 .then(playlist => {
                   HeartRate.findByIdAndUpdate(heartrate._id, {
 
-                    $set: {
-                      playlist: playlist.data.tracks
-                    }
-                  }, {
-                    new: true
-                  })
+                      $set: {
+                        playlist: playlist.data.tracks
+                      }
+                    }, {
+                      new: true
+                    })
                     //Redirect user to Playlist page for the measured heartrate!!!
                     .then(updatedHeartrate => {
                       console.log("UPDATED HEART RATE>>> ", updatedHeartrate)
@@ -254,10 +254,9 @@ router.post("/arduino", loginCheck(), (req, res, next) => {
 
 router.get("/getplaylist", (req, res, next) => {
   HeartRate.find({
-    user: req.user._id
-  })
+      user: req.user._id
+    })
     .then(found => {
-      console.log("foundddddd playlists:", found);
       res.json(found);
     }).catch(err => {
       console.log(err)
