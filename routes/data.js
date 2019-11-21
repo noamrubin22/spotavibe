@@ -151,12 +151,6 @@ router.get("/arduino", loginCheck(), (req, res, next) => {
   res.render("data/ardunexplan.hbs");
 })
 
-// router.get("/heartpulsemeasurer", loginCheck(), (req, res, next) => {
-//   console.log("arduino is called");
-//   res.render("data/arduino.hbs");
-// })
-
-
 router.post("/arduino", loginCheck(), (req, res, next) => {
   // res.render("data/arduino.hbs");
 
@@ -166,7 +160,6 @@ router.post("/arduino", loginCheck(), (req, res, next) => {
     cwd: "./public/javascripts/",
     stdio: ['pipe', 'pipe', 'pipe', 'ipc']
   });
-
 
   let heartData = [];
   // parent listens to the child
@@ -204,6 +197,7 @@ router.post("/arduino", loginCheck(), (req, res, next) => {
               generatePlaylist(heartrate.BPM, 'edm', heartrate.user.accessToken)
                 .then(playlist => {
                   HeartRate.findByIdAndUpdate(heartrate._id, {
+
                       $set: {
                         playlist: playlist.data.tracks
                       }
@@ -213,7 +207,6 @@ router.post("/arduino", loginCheck(), (req, res, next) => {
                     //Redirect user to Playlist page for the measured heartrate!!!
                     .then(updatedHeartrate => {
                       console.log("UPDATED HEART RATE>>> ", updatedHeartrate)
-                      // res.json(updatedHeartrate);
                       res.redirect(`/profile/playlist/${updatedHeartrate._id}`)
                     })
                 }).catch(err => {
@@ -229,5 +222,22 @@ router.post("/arduino", loginCheck(), (req, res, next) => {
     });
   })
 })
+
+// axios request from backend
+router.get("/getplaylist", (req, res, next) => {
+  HeartRate.find({
+      user: req.user._id
+    })
+    .then(found => {
+      console.log("foundddddd playlists:", found);
+      res.json(found, {
+        playlists: found
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+})
+
+
 
 module.exports = router;

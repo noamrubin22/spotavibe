@@ -71,7 +71,8 @@ router.get('/playlist/:heartrateID', (req, res, next) => {
       res.render('profile/playlist', {
         playlistArr: heartrateData.playlist,
         heartrateData: heartrateData,
-        user: req.user
+        user: req.user,
+
       })
     })
     .catch(err => {
