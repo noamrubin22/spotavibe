@@ -40,6 +40,25 @@ const generatePlaylist = async (bpm, genres, accessToken) => {
   })
 }
 
+/* ---------------------------------------------------- Generating a NEW Access Token --------------------------------------------------- */
+
+// const generateAccessToken = async (refreshToken) => {
+//   console.log("HELL YEA!")
+
+//   return await axios({
+//     method: 'post',
+//     url: "https://accounts.spotify.com/api/token",
+//     params: {
+//       grant_type: 'refresh_token',
+//       refresh_token: refreshToken
+//     },
+//     headers: {
+//       'Content-Type': 'application/x-www-form-urlencoded',
+//       'Authorization': 'Basic ' + process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET
+//     },
+//   })
+// }
+
 /* ---------------------------------------------------------- manual BPM input ---------------------------------------------------------- */
 
 // manual BPM input
@@ -58,9 +77,8 @@ router.post("/", loginCheck(), (req, res, next) => {
         method: "manual",
         user: user
       })
-        //Generate the Playlist and push into relevant heartrate model doc
         .then(heartrate => {
-          generatePlaylist(heartrate.BPM, 'edm', heartrate.user.accessToken)
+          generatePlaylist(heartrate.BPM, 'edm', req.user.accessToken)
             .then(playlist => {
               HeartRate.findByIdAndUpdate(heartrate._id, { $set: { playlist: playlist.data.tracks } }, { new: true })
                 //Redirect user to Playlist page for the measured heartrate!!!
@@ -69,12 +87,15 @@ router.post("/", loginCheck(), (req, res, next) => {
                   res.redirect(`/profile/playlist/${updatedHeartrate._id}`)
                 })
             })
-            .catch(err => { console.log(err) })
+            .catch(err => {
+              next(err)
+            })
         })
         .catch(err => {
           next(err);
         });
-    }).catch(err => {
+    })
+    .catch(err => {
       next(err);
     });
 })
