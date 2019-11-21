@@ -16,7 +16,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/User");
 // const loginCheck = require("../spotavibe/public/javascripts/loginCheck")
-
+mongoose.set('useFindAndModify', false);
 
 mongoose
   .connect('mongodb://localhost/spotavibe', {
@@ -47,15 +47,15 @@ const SpotifyStrategy = require("passport-spotify").Strategy;
 
 passport.use(
   new SpotifyStrategy({
-    clientID: process.env.SPOTIFY_CLIENT_ID,
-    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/spotify/callback"
-  },
+      clientID: process.env.SPOTIFY_CLIENT_ID,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/auth/spotify/callback"
+    },
     (accessToken, refreshToken, profile, done) => {
       console.log("ACCESS TOKEN :" + accessToken + "=> END")
       User.findOne({
-        spotifyId: profile.id
-      })
+          spotifyId: profile.id
+        })
         .then(user => {
           if (user) {
             // update existing user's accessToken to be valid for another HOUR => Then logging the user in
@@ -64,12 +64,11 @@ passport.use(
             //done(null, user);
           } else {
             return User.create({
-              spotifyId: profile.id,
-              accessToken: accessToken,
-              refreshToken: refreshToken,
-              userPhoto: profile._json.images[0].url,
-              userJson: profile._json
-            })
+                spotifyId: profile.id,
+                accessToken: accessToken,
+                userPhoto: profile._json.images[0].url,
+                userJson: profile._json
+              })
               .then(newUser => {
                 // log user in
                 done(null, newUser);

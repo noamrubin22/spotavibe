@@ -68,9 +68,16 @@ router.get('/playlist/:heartrateID', (req, res, next) => {
     .populate('user')
     .then(heartrateData => {
       console.log("READY TO POPULATE>>>" + heartrateData)
-      res.render('profile/playlist', { playlistArr: heartrateData.playlist, heartrateData: heartrateData, user: req.user })
+      res.render('profile/playlist', {
+        playlistArr: heartrateData.playlist,
+        heartrateData: heartrateData,
+        user: req.user,
+
+      })
     })
-    .catch(err => { console.log(err) })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 
