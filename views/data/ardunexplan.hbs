@@ -1,4 +1,5 @@
-<div class="content">
+<div class="content-arduino">
+
   <div class="header-background">
     <div class="header">
       <div class="user-info">
@@ -12,36 +13,33 @@
     </div>
   </div>
 
-  <h2>Explanation about Arduino</h2>
-  {{!-- does not work yet :( i don't know why) --}}
-  <h3>Make sure you download the <a href="/public/javascripts/HeartPulseMeasurer_project2.ino" download>following
-      Arduino
-      script</a>
-  </h3>
-
-  <h5>So if it's all clear you are ready for the measurements. The only thing ahead is adding the name of your port that
-    is connected to the Arduino. Make sure you are sitting in a quite place and place your finger on the sensor. Be
-    patient as it takes a bit of time for the Arduino to start measuring your heartpulse. The build-in LED light will
-    blink when your heartpulse is detected.</h5>
-  <form action="/data/arduino" method="post">
-    <h3>Choose a genre</h3>
-    <select name="dropdown" id='dropdown'>
-      {{!-- being populated via DOM manipulation --}}
-    </select>
-    <h3>Add a name to your playlist</h3>
-    <h4>How do you feel?</h4>
-    <input type="text" name="playlistName" id="playlistName">
-    <hr>
-    <h4>Add the name of the port your Arduino is connected to</h4>
-    <input type="text" name="arduinoPort" id="arduinoPort" value="/dev/cu.wchusbserial1410">
-    {{#if errorMessage}}
-    <div class="error-message">{{ errorMessage }}</div>
-    {{/if}}
-    <button type="submit" class="show-heart">Click to start</button>
-  </form>
-  <div class="lds-heart">
-    <div></div>
-  </div>`
+  <div class="arduino">
+    <form action="/data/arduino" method="post" class="arduinoBPM">
+      <h3>Explanation about Arduino</h3>
+      {{!-- does not work yet :( i don't know why) --}}
+      <h5>Download <a href="/public/javascripts/HeartPulseMeasurer_project2.ino" download>
+          this Arduino script!</a>
+      </h5>
+      <h6>Once downloaded, you are ready to measure. Place your finger on the sensor in a quiet setting.</h6>
+      <h6> Be patient as it takes some time for the Arduino to start measuring. The built-in LED light will blink when
+        the heartpulse is detected.</h6>
+      <h4>Choose a genre</h4>
+      <select name="dropdown" id='dropdown'>
+        {{!-- being populated via DOM manipulation --}}
+      </select>
+      <h4>Add a name to your playlist</h4>
+      <p>(Perhaps how you feel?)</p>
+      <input type="text" name="playlistName" id="playlistName" placeholder="name">
+      <h4>Add the name of your Arduino port :</h4>
+      <input type="text" name="arduinoPort" id="arduinoPort" value="/dev/cu.wchusbserial1410">
+      {{#if errorMessage}}
+      <div class="error-message">{{ errorMessage }}</div>
+      {{/if}}
+      <button type="submit" class="show-heart">Click to start</button>
+    </form>
+    <div class="lds-heart">
+    </div>
+  </div>
 </div>
 
 <script src="/javascripts/genres.js"></script>

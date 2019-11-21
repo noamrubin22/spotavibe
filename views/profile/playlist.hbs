@@ -20,38 +20,20 @@
     </div>
   </div>
 
-  {{!-- <div class="playlistHeader">
-    <div class="userInfo">
-      <img src={{user.userPhoto}} alt="User's profile photo">
-      <div class="textInfo">
-        <h4>{{user.userJson.display_name}}! We created a playlist just for you based on your measured BPM
-          ({{heartrateData.BPM}}),
-          measured with the {{heartrateData.method}} method. We filtered the songs using a target BPM of
-          {{heartrateData.targetBPM}} </h4>
-        <h2>{{heartrateData.playlistName}}</h2>
-        <form action="/profile/playlist" method="post">
-          <button type="submit">GENERATE PLAYLIST</button>
-        </form>
-      </div>
-    </div>
-  </div> --}}
   <div class="playlist-recommendations">
     <h3>Our recommendations:</h3>
-    <div>
-      {{#each playlistArr}}
-      <div class="trackBlock row">
-        <h4 class="trackTitle"> {{this.name}} </h4>
-        <h5 class="trackArtist">{{ this.artists.0.name }}</h5>
-        <audio controls src="{{this.preview_url}}" class="trackControls">
-          Your browser does not support the
-          <code>audio</code> element.
-        </audio>
-        <a href="{{this.external_urls.spotify}}" class="spotifyURL">linkspotify</a>
-      </div>
-      {{/each}}
+    {{#each playlistArr}}
+    <div class="trackBlock row">
+      <p class="trackArtist">{{ this.artists.0.name }}</p>
+      <h5 class="trackTitle"> {{this.name}} </h5>
+      <audio controls src="{{this.preview_url}}" class="trackControls">
+        Your browser does not support the
+        <code>audio</code> element.
+      </audio>
+      <a href="{{this.external_urls.spotify}}" class="spotifyURL">
+        <img src="/images/spotify-rainbow.jpg" alt="Rainbow Spotify logo linked to whole song" class="spotify">
+      </a>
     </div>
     {{/each}}
   </div>
-  {{!-- <script src="/javascripts/spotify-playlist.js" charset="utf-8"></script> --}}
-  {{!-- </div> --}}
 </div>

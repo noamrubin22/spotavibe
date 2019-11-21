@@ -46,7 +46,9 @@ const generatePlaylist = async (bpm, genres, accessToken) => {
 /* ---------------------------------------------------------- manual BPM input ---------------------------------------------------------- */
 
 router.get("/manual", loginCheck(), (req, res, next) => {
-  res.render('data/manualBPM')
+  res.render('data/manualBPM', {
+    user: req.user
+  })
 })
 
 router.post("/manual", loginCheck(), (req, res, next) => {
@@ -89,7 +91,6 @@ router.post("/manual", loginCheck(), (req, res, next) => {
         .then(heartrate => {
           generatePlaylist(heartrate.BPM, genre, req.user.accessToken)
             .then(playlist => {
-              res.send(playlist.data.tracks)
               HeartRate.findByIdAndUpdate(heartrate._id, {
                 $set: {
                   playlist: playlist.data.tracks
@@ -120,12 +121,16 @@ router.post("/manual", loginCheck(), (req, res, next) => {
 
 router.get("/tap", loginCheck(), (req, res, next) => {
   console.log("tap option clicked")
-  res.render("data/tapexplan.hbs")
+  res.render("data/tapexplan.hbs", {
+    user: req.user
+  })
 })
 
 router.get("/tapper", loginCheck(), (req, res, next) => {
   console.log("tapper")
-  res.render("data/tapper.hbs");
+  res.render("data/tapper.hbs", {
+    user: req.user
+  });
 })
 
 
@@ -193,7 +198,9 @@ router.post("/tapper", loginCheck(), (req, res, next) => {
 
 router.get("/arduino", loginCheck(), (req, res, next) => {
   console.log("redirected to arduino explanation");
-  res.render("data/ardunexplan.hbs");
+  res.render("data/ardunexplan.hbs", {
+    user: req.user
+  });
 })
 
 router.post("/arduino", loginCheck(), (req, res, next) => {

@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // show average BPM 
         const tapper = document.body.querySelector(".tapper");
-        let BPMplaceholder = document.createElement("H3");
+        let BPMplaceholder = document.createElement("H4");
         BPMplaceholder.setAttribute("id", "avgBPM");
         let textInput = document.createTextNode(`Average BPM : ${averageBPM}`);
         BPMplaceholder.appendChild(textInput);

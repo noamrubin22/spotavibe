@@ -47,27 +47,17 @@ h1 {
 /* ----------------------------------------------------------- LAYOUT ----------------------------------------------------------- */
 body {
   width: 100%;
+  height: 100vh;
   display: flex;
 }
 
 .layout {
-  display: flex;
-  height: 100vh;
+  height: 100%;
 }
 
-
-
-// .nav {
-// display: flex;
-// flex-direction: column;
-// background-image: linear-gradient(to bottom, #DC8665, #EEB462);
-// width: 100px;
-// height: 100vh;
-// align-items: center;
-// justify-content: center;
-// z-index: 2;
-// float: left;
-// }
+    li {
+      font-weight: 600;
+  }
 
 .body-content {
   width: 100%;
@@ -79,7 +69,8 @@ body {
   display: flex;
   flex-direction: column;
   width: 200px;
-  padding: 90px 45px;
+  height: 100%;
+  padding: 90px 40px;
 
   .navbar-nav {
     display: flex;
@@ -140,24 +131,6 @@ body {
 
 /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
 
-// .intro {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   padding: 0;
-// }
-
-// .introHead {
-//   text-align: center;
-//   padding: 20px;
-// }
-
-// .introBody {
-//   display: flex;
-//   align-items: center;
-// }
-
-
 .loginSpotify {
 
   img {
@@ -216,13 +189,6 @@ body {
   }
 }
 
-.manualBPM {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-}
-
 .data-options {
   display: flex;
   justify-content: space-between;
@@ -272,6 +238,225 @@ body {
   width: 100%;
 }
 
+/* --------------------------------------------------------------- ARDUINO -------------------------------------------------------------- */
+.content-arduino {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center;
+
+  .arduino{
+    
+    .arduinoBPM {
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      align-items: center;
+    }
+
+  h3 {
+    margin: 40px 0;
+    color: #138086;
+    font-weight: 800;
+  }
+
+  h4 {
+    color: #534666;
+    margin: 10px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+
+    input {
+      height: 40px;
+      width: 280px;
+      border-radius: 15px;
+    }
+
+    select {
+      height: 40px;
+      width: 280px;
+      border-radius: 15px;
+    }
+
+    button {
+      margin-top: 30px;
+      height: 30px;
+      width: 150px;
+      border-radius: 15px;
+    }
+  }
+
+}
+
+/* --------------------------------------------------------------- MANUAL --------------------------------------------------------------- */
+.content-manual {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center;
+
+  .manual-option{
+    
+    .manualBPM {
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      align-items: center;
+    }
+
+  h3 {
+    margin: 50px 0;
+    color: #138086;
+    font-weight: 800;
+  }
+
+  h4 {
+    color: #534666;
+    margin: 10px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+
+    input {
+      height: 40px;
+      width: 280px;
+      border-radius: 15px;
+    }
+
+    select {
+      height: 40px;
+      width: 280px;
+      border-radius: 15px;
+    }
+
+    button {
+      margin-top: 30px;
+      height: 30px;
+      width: 150px;
+      border-radius: 15px;
+    }
+  }
+}
+
+/* --------------------------------------------------------------- TAPPING -------------------------------------------------------------- */
+
+.content-tap {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center;
+}
+
+.content-tapper {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center;
+}
+
+.explanation-tap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  h3 {
+    margin: 50px 0;
+    color: #138086;
+    font-weight: 800;
+  }
+
+  h5 {
+    margin-top: 20px;
+    color: #138086;
+  }
+
+  img {
+    width: 350px;
+    height: auto;
+    border-radius: 20px;
+  }
+
+  button {
+    margin-top: 30px;
+    height: 30px;
+    width: 150px;
+    border-radius: 15px;
+  }
+}
+
+.tapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  .tapperBPM {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+  }
+
+  h3 {
+    margin: 50px 0;
+    color: #138086;
+    font-weight: 800;
+  }
+
+  h4 {
+    color: #534666;
+    margin: 10px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+
+    input {
+      height: 40px;
+      width: 280px;
+      border-radius: 15px;
+    }
+
+    select {
+      height: 40px;
+      width: 280px;
+      border-radius: 15px;
+    }
+
+    button {
+      margin-top: 30px;
+      height: 30px;
+      width: 150px;
+      border-radius: 15px;
+    }
+  }
+
+
 /* ------------------------------------------------------------ PLAYLIST PAGE ----------------------------------------------------------- */
 
 .content-playlist {
@@ -300,6 +485,7 @@ body {
 
 .playlist-recommendations {
   width: 100%;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -313,13 +499,32 @@ body {
   }
 
   .trackBlock{
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
+    h5 {
+      width: 38%;
+      text-align: left;
+    }
+    
+    p {
+      width: 15%;
+      text-align: right;
+    }
+
+    audio {
+      width: 30%;
+    }
+
+    img {
+      width: 50px;
+      height: auto;
+    }
   }
 }
+
 
 .playlistBPM {
   display: flex;

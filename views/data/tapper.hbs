@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content-tapper">
 
   <div class="header-background">
     <div class="header">
@@ -13,31 +13,24 @@
     </div>
   </div>
 
-  {{!-- <div class="explanation-tap">
-    <h2>Explanation how to tap</h2>
-    <h4>nice image</h4>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate voluptates aliquam quaerat quis inventore
-      dolorem
-      doloremque fugiat, rem praesentium eaque et officia magni veniam tempore velit, aperiam enim cum. Dolore?????</p>
-  </div> --}}
-
-  <form action="/data/tapper" method="post" id="form">
-    <select name="dropdown" id='dropdown'>
-      {{!-- being populated via DOM manipulation --}}
-    </select>
-    <h3>Add a name to your playlist</h3>
-    <h4>How do you feel?</h4>
-    <input type="text" name="playlistName" id="playlistName">
-    <hr>
-    {{#if errorMessage}}
-    <div class="error-message">{{ errorMessage }}</div>
-    {{/if}}
-  </form>
-
   <div class="tapper">
+    <form action="/data/tapper" method="post" id="form" class="tapperBPM">
+      <h3>Manual measurement of current heart-rate</h3>
+      <h4>Choose a genre</h4>
+      <select name="dropdown" id='dropdown'>
+        {{!-- being populated via DOM manipulation --}}
+      </select>
+      <h4>Add a name to your playlist</h4>
+      <p>(Perhaps how you feel?)</p>
+      <input type="text" name="playlistName" id="playlistName" placeholder="name">
+      {{#if errorMessage}}
+      <div class="error-message">{{ errorMessage }}</div>
+      {{/if}}
+    </form>
+
     <button id="tapper">Tap</button>
+    <h4 id="BPM">Tap everytime you feel a pulse</h4>
     {{!-- <button id="startbutton">Start</button> --}}
-    <h1 id="BPM"></h1>
     <div class="progress">
       <div class="progress-inner green"></div>
       {{!-- <canvas id="canvas" width="160" height="20"></canvas> --}}

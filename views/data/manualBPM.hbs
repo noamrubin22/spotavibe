@@ -13,25 +13,18 @@
     </div>
   </div>
 
-  <h1>Find your vibe</h1>
-  {{!-- Dropdown menu for genres --}}
-  <form>
-
-  </form>
-  {{!-- Different input methods --}}
-
   <div class="manual-option">
     <form action="/data/manual" method="post" class="manualBPM">
-      <h3>Choose a genre</h3>
+      <h3>Manual BPM Input</h3>
+      <h4>Choose a genre</h4>
       <select name="dropdown" id='dropdown'>
         {{!-- being populated via DOM manipulation --}}
       </select>
-      <h3>Add a name to your playlist</h3>
-      <h4>How do you feel?</h4>
-      <input type="text" name="playlistName" id="playlistName">
-      <hr>
-      <h3>Type your BPM</h3>
-      <input type="text" name="manualBPM" id="manualBPM">
+      <h4>Add a name to your playlist</h4>
+      <p>(Perhaps how you feel?)</p>
+      <input type="text" name="playlistName" id="playlistName" placeholder="name">
+      <h4>Type your BPM</h4>
+      <input type="text" name="manualBPM" id="manualBPM" placeholder="BPM value">
       <button type="submit">submit</button>
       {{#if errorMessage}}
       <div class="error-message">{{ errorMessage }}</div>
