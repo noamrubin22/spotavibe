@@ -228,7 +228,7 @@ router.post("/arduino", loginCheck(), (req, res, next) => {
     console.log('message from child:', message);
 
     // push heartData into array
-    if (!!Number(message)) {
+    if (Number(message)) {
       // correct for outliers by movement
       if (message < 110 && message > 55) {
         heartData.push(message);
