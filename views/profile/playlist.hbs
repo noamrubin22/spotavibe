@@ -1,6 +1,26 @@
-<div class="content">
-  {{!-- <div class="playlistBody"> --}}
-  <div class="playlistHeader">
+<div class="content-playlist">
+  <div class="header-background">
+    <div class="header">
+      <div class="user-info">
+        <img src="{{user.userPhoto}}" alt="">
+        <h4>{{user.userJson.display_name}}</h4>
+      </div>
+      <div class="title">
+        <h1>Generated Playlist</h1>
+        <h5>A personally curated playlist to relax your BPM</h5>
+      </div>
+      <div class="BPM-info">
+        <h5>Your input BPM :</h5>
+        <h5>{{heartrateData.BPM}}</h5>
+        <h5>Input method :</h5>
+        <h5>{{heartrateData.method}}</h5>
+        <h5>Recommended BPM :</h5>
+        <h5>{{heartrateData.targetBPM}}</h5>
+      </div>
+    </div>
+  </div>
+
+  {{!-- <div class="playlistHeader">
     <div class="userInfo">
       <img src={{user.userPhoto}} alt="User's profile photo">
       <div class="textInfo">
@@ -13,20 +33,18 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> --}}
   <div class="playlist-recommendations">
     <h3>Our recommendations:</h3>
-    <div>
-      {{#each playlistArr}}
-      <div class="trackBlock row">
-        <h4 class="trackTitle">{{this.name}}</h4>
-        <audio controls src="{{this.preview_url}}" class="trackControls">
-          Your browser does not support the
-          <code>audio</code> element.
-        </audio>
-      </div>
-      {{/each}}
+    {{#each playlistArr}}
+    <div class="trackBlock row">
+      <h5 class="trackTitle">{{this.name}}</h5>
+      <audio controls src="{{this.preview_url}}" class="trackControls">
+        Your browser does not support the
+        <code>audio</code> element.
+      </audio>
     </div>
+    {{/each}}
   </div>
   {{!-- <script src="/javascripts/spotify-playlist.js" charset="utf-8"></script> --}}
   {{!-- </div> --}}

@@ -10,10 +10,38 @@ a {
   color: #00b7ff;
 }
 
+p {
+  color: #138086;
+}
+
 h1 {
   font-size: 50px;
   font-weight: 600;
-  color: #138085;
+  color: white;
+}
+
+// Repeated Header in many pages:
+.header {
+  padding: 15px 0;
+  display: flex;
+  h4 {color: white;}
+  h5 {color: lightgray;}
+
+  .user-info {
+    width: 25%;
+    text-align: center;
+
+    img {
+      height: 130px;
+      border-radius: 15px;
+    }
+  }
+
+  .title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 /* ----------------------------------------------------------- LAYOUT ----------------------------------------------------------- */
@@ -26,6 +54,8 @@ body {
   display: flex;
   height: 100vh;
 }
+
+
 
 // .nav {
 // display: flex;
@@ -170,15 +200,20 @@ body {
 
 /* ---------------------------------------------------------- MEASUREMENT PAGE ---------------------------------------------------------- */
 .content-measurements {
-  width: 70%;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
-  background-color: greenyellow;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   align-content: center;
+
+  h3 {
+    margin: 50px 0;
+    color: #138086;
+    font-weight: 800;
+  }
 }
 
 .manualBPM {
@@ -188,63 +223,93 @@ body {
   align-items: center;
 }
 
-.tap-option {
-  background-color: pink;
-  display: flex;
-
-  a {
-    align-content: center;
-    align-items: center;
-  }
-}
-
 .data-options {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  img {
+    height: auto;
+    width: 100px;
+    margin: 10px 0;
+  }
+
+  h4 {
+    color: #534666;
+    font-weight: 500;
+  }
+
+  .bpm-option {
+    text-align: center;
+    width: 30%;
+    height: 200px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    // HOVER ANIMATION
+    transition: box-shadow .3s;
+    border: 1px solid #ccc;
+    background: #fff;
+    float: left;
+    }
+
+  .bpm-option:hover {
+    box-shadow: 0 0 15px rgba(33,33,33,.2); 
+  }
+  
 }
 
-.arduino-option {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.tap-option {
-  padding: 30px;
-}
 
 /* ------------------------------------------------------------ PLAYLIST PAGE ----------------------------------------------------------- */
 
-.playlistHeader {
-  display: flex;
-  justify-content: space-around;
-  padding: 20px;
-  margin: 0;
-  // height: 300px;
-  width: 100%;
-  // margin-left: 150px;
-  // z-index: 1;
-  background-image: linear-gradient(to bottom left, #138086, #534666);
-}
-
-.playlist {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  // where is this?
-}
-
-.userInfo {
-  display: flex;
-  background-color: pink;
-}
-
-.playlist-recommendations {
+.content-playlist {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   align-items: center;
-  padding: 20px;
+}
+
+.BPM-info {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 50px;
+
+  h5 {
+    color: white;
+  }
+}
+
+.playlist-recommendations {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
+  h3 {
+    margin: 15px 0;
+    color: #138086;
+    font-weight: 800;
+  }
+
+  .trackBlock{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
 }
 
 .playlistBPM {
@@ -256,17 +321,27 @@ body {
 }
 
 /* ------------------------------------------------------------- STATS Page ------------------------------------------------------------- */
+.header-background {
+  background-image: linear-gradient(to bottom right, #138086, #534666);
+  height: 180px;
+  width: 100%;
+  border-radius: 0 0 30px 30px;
+}
 
 .content-chart {
-  width: 70%;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   align-items: center;
+
+  .stats-chart {
+    width: 85%;
+    text-align: center;
+  }
 }
 
 #myChart {

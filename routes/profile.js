@@ -18,6 +18,8 @@ const loginCheck = () => {
 // let arrBPM;
 // let arrDates;
 
+/* -------------------------------------------------------- RENDERING STATS PAGE -------------------------------------------------------- */
+
 router.get("/stats", loginCheck(), (req, res, next) => {
 
   // find user
@@ -47,6 +49,7 @@ router.get("/stats", loginCheck(), (req, res, next) => {
       res.render("profile/stats", {
         arrBPM: JSON.stringify(arrBPM),
         arrDates: JSON.stringify(arrDates),
+        user: req.user
       }))
     .catch(err => {
       console.log(err);
