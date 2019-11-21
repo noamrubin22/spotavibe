@@ -1,26 +1,32 @@
 {{!-- <img src="images/heart.png" alt="heart" height="200"> --}}
 
 <div class="content-measurements">
-  {{!-- <img src={{user.userPhoto}} alt="User's profile photo"> --}}
 
+  <h1>Find your vibe</h1>
+
+  {{!-- Different input methods --}}
+  <h3>Choose your BPM input method</h3>
   <div class="data-options">
     <div class="arduino-option">
+      <h3>Arduino Heartrate Sensor</h3>
       <a href="http://localhost:3000/data/arduino">
-        <img src="/images/arduino.png" alt="arduino-logo" height="50">;
+        <img src="/images/arduino-logo.png" alt="arduino-logo" height="50">;
+      </a>
+    </div>
+
+    <div class="manual-option">
+      <h3>Manual BPM Input</h3>
+      <a href="/data/manual">
+        <img src="/images/keyboard.png" alt="keyboard icon">
       </a>
     </div>
 
     <div class="tap-option">
+      <h3>Manual Heartrate Measurement</h3>
       <a href="http://localhost:3000/data/tap">
         <button type="submit">TAP</button>
       </a>
     </div>
 
-    <div class="manual-option">
-      <form action="/data" method="post" class="manualBPM">
-        <label for="manualBPM">BPM: </label>
-        <input type="text" name="manualBPM" id="manualBPM">
-      </form>
-    </div>
   </div>
 </div>

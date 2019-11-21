@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const heartRateSchema = new Schema({
   BPM: Number,
   targetBPM: Number,
+  genre: String,
   date: Date,
   method: {
     type: String,
