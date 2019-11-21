@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* visualization timer */
   function progress() {
     // inspired from https://codepen.io/zmuci/pen/rJooKr
-    var speed = 5;
+    var speed = 20;
     var indexPB = speed * 60; // 60 FPS
 
     function tapFunction() {
