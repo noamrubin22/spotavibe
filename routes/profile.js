@@ -30,8 +30,8 @@ router.get("/stats", loginCheck(), (req, res) => {
       // create empty arrays
       let arrBPM = [];
       let arrDates = [];
-      let measuringMethod;
-      let testMeasure = 20;
+      let measuringMethod = [];
+
       // let measuringMethod;
       heartrate.forEach(el => {
         // let measuringMethod = el.method
@@ -44,18 +44,11 @@ router.get("/stats", loginCheck(), (req, res) => {
           let newdate = el.date.getDate() + "/" + (el.date.getMonth() + 1) + "/" + el.date.getFullYear();
           arrDates.push(newdate);
 
-          if (el.method) {
-            console.log("method found")
-            measuringMethod = el.method;
-          }
-        } else {
-          measuringMethod = "none";
-          // create button
-          console.log("no input")
+          measuringMethod.push(el.method);
         }
       })
       res.render("profile/stats", {
-        measuringMethod: testMeasure,
+        measuringMethod: JSON.stringify(measuringMethod),
         arrBPM: JSON.stringify(arrBPM),
         arrDates: JSON.stringify(arrDates),
         user: req.user

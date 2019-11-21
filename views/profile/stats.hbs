@@ -27,14 +27,11 @@
 {{!-- <script src="/javascripts/utils.js"></script> --}}
 <script>
 
-  drawBarChart({{{ arrDates }}}, {{{ arrBPM }}}, {{{ measuringMethod }}});
-
-  function drawBarChart(dates, BPM, method) {
+  drawBarChart({{{ arrDates }}}, {{{ arrBPM }}});
+  function drawBarChart(dates, BPM) {
 
     var ctx = document.getElementById("myChart").getContext("2d");
 
-    //if method is 
-    console.log(method)
 
     const drawChart = new Chart(ctx, {
       type: "bar",
@@ -43,7 +40,7 @@
         datasets: [{
           label: "BPM",
           data: BPM,
-          backgroundColor: "rgba(255, 159, 64, 0.2)",
+          backgroundColor: 'rgba(255, 159, 64, 0.2)',
           borderColor: "rgba(255, 159, 64, 1)",
           borderWidth: 1
         }]
@@ -58,5 +55,5 @@
         }
       }
     });
-  } 
+  }
 </script>

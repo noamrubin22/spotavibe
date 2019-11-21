@@ -24,8 +24,14 @@ h1 {
 .header {
   padding: 15px 0;
   display: flex;
-  h4 {color: white;}
-  h5 {color: lightgray;}
+
+  h4 {
+    color: white;
+  }
+
+  h5 {
+    color: lightgray;
+  }
 
   .user-info {
     width: 25%;
@@ -37,7 +43,7 @@ h1 {
     }
   }
 
-  .title{
+  .title {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -111,6 +117,7 @@ body {
   border-radius: 8px;
   overflow: hidden;
   stroke: "green";
+  color: #138086;
 
   .progress-inner {
     width: 100%;
@@ -120,7 +127,8 @@ body {
     left: 0;
 
     &.green {
-      background: green;
+      background: #138086;
+      ;
     }
 
     // &.orange {
@@ -140,60 +148,72 @@ body {
 
 /* ------------------------------------------------------------- FRONT PAGE ------------------------------------------------------------- */
 
-// .intro {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   padding: 0;
-// }
-
-// .introHead {
-//   text-align: center;
-//   padding: 20px;
-// }
-
-// .introBody {
-//   display: flex;
-//   align-items: center;
-// }
-
-
-.loginSpotify {
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  background-image: url("/images/indexpage.jpg");
+  background-repeat: repeat;
+  background-size: cover;
+  padding: 50px 0;
 
   img {
-    width: 20vw;
-    padding: 10px;
+    margin: 20px;
+
+  }
+
+  h4 {
+    text-align: center;
+    width: 700px;
+    margin: 20px;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 20px;
+    border-radius: 25px;
+    line-height: 30px;
   }
 
   a {
-    color: inherit;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    color: lightgray;
+    text-decoration: none;
+
+    h5 {
+      text-align: center;
+      font-weight: bold;
+
+    }
   }
 }
+
+.introBody {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+// .loginSpotify {
+
+//   img {
+//     width: 20vw;
+//     padding: 10px;
+//   }
+
+//   a {
+//     color: inherit;
+//   }
+// }
 
 .info-index {
   margin: 20px;
 }
 
-.carousel-caption {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-
-  img {
-    padding: 30px;
-  }
-}
-
-
-.carousel-inner>.item {
-  position: relative;
-  display: none;
-  -webkit-transition: 0.6s ease-in-out left;
-  -moz-transition: 0.6s ease-in-out left;
-  -o-transition: 0.6s ease-in-out left;
-  transition: 0.6s ease-in-out left;
+.info-spotavibe {
+  width: 400px;
 }
 
 /* ------------------------------------------------------------- DATA PAGES ------------------------------------------------------------- */
@@ -254,12 +274,12 @@ body {
     border: 1px solid #ccc;
     background: #fff;
     float: left;
-    }
+  }
 
   .bpm-option:hover {
-    box-shadow: 0 0 15px rgba(33,33,33,.2); 
+    box-shadow: 0 0 15px rgba(33, 33, 33, .2);
   }
-  
+
 }
 
 // error message
@@ -312,7 +332,7 @@ body {
     font-weight: 800;
   }
 
-  .trackBlock{
+  .trackBlock {
     width: 80%;
     display: flex;
     justify-content: space-between;
