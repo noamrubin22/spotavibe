@@ -38,7 +38,7 @@ const generatePlaylist = async (bpm, genres, accessToken) => {
       limit: 10,
       seed_genres: genres,
       market: 'from_token',
-      tempo: bpm
+      tempo: ((bpm + 60) / 2)
     }
   })
 }
@@ -65,7 +65,8 @@ const generatePlaylist = async (bpm, genres, accessToken) => {
 /* ---------------------------------------------------------- manual BPM input ---------------------------------------------------------- */
 
 router.post("/", loginCheck(), (req, res, next) => {
-  const BPM = req.body.manualBPM;
+  let BPM = req.body.manualBPM;
+  let targetBPM = ((Number(BPM) + 60) / 2);
   console.log("BPM: ", BPM)
 
   //find user
@@ -75,6 +76,7 @@ router.post("/", loginCheck(), (req, res, next) => {
       //add heartrate data to the database
       HeartRate.create({
         BPM: BPM,
+        targetBPM: targetBPM,
         date: Date.now(),
         method: "manual",
         user: user
@@ -92,7 +94,7 @@ router.post("/", loginCheck(), (req, res, next) => {
               })
                 //Redirect user to Playlist page for the measured heartrate!!!
                 .then(updatedHeartrate => {
-                  console.log("UPDATED HEART RATE>>> " + updatedHeartrate)
+                  // console.log("UPDATED HEART RATE>>> " + updatedHeartrate)
                   res.redirect(`/profile/playlist/${updatedHeartrate._id}`)
                 })
             })
@@ -124,6 +126,7 @@ router.get("/tapper", loginCheck(), (req, res, next) => {
 
 router.post("/tapper", loginCheck(), (req, res, next) => {
   let BPM = req.body.avgBPM
+  let targetBPM = ((Number(BPM) + 60) / 2);
   console.log("BPM: ", BPM)
   console.log("got into post")
 
@@ -134,6 +137,7 @@ router.post("/tapper", loginCheck(), (req, res, next) => {
       //add heartrate data to the database
       HeartRate.create({
         BPM: BPM,
+        targetBPM: targetBPM,
         date: Date.now(),
         method: "tap",
         user: user
@@ -201,6 +205,7 @@ router.post("/arduino", loginCheck(), (req, res, next) => {
 
         // calculate average BPM
         BPM = Math.round(heartData.reduce((acc, val) => acc + val, 0) / heartData.length);
+        let targetBPM = ((Number(BPM) + 60) / 2);
         console.log("average: ", BPM);
 
         // create heartratemodel for user
@@ -211,6 +216,7 @@ router.post("/arduino", loginCheck(), (req, res, next) => {
             //add heartrate data to the database
             HeartRate.create({
               BPM: BPM,
+              targetBPM: targetBPM,
               date: Date.now(),
               method: "arduino",
               user: user
