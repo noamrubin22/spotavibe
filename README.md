@@ -19,8 +19,8 @@ We deployed using heroku.
 - [Node.js](https://nodejs.org/en/) - Our server environment
 - [Express](https://expressjs.com/) - The web framework used
 - [MongoDB](https://www.mongodb.com/) - Used Database
-- [Spotify API] (https://developer.spotify.com/) - The acquired API
-- [Arduino] (https://www.arduino.cc/) - The attached hardware
+- [Spotify API](https://developer.spotify.com/) - The acquired API
+- [Arduino](https://www.arduino.cc/) - The attached hardware
 
 
 ## Authors
