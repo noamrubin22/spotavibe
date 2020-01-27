@@ -1,6 +1,6 @@
 # Spotavibe
 
-This is the second project of the Ironhack bootcamp. We created a web application which creates Spotify-playlists, based on the users heartpulse, with the intention of calming them down. Check it out on [http://spotavibe.herokuapp.com/]
+This is the second project of the Ironhack bootcamp. We created a web application which creates Spotify-playlists, based on the users heartpulse, with the intention of calming them down. Check it out on http://spotavibe.herokuapp.com/
 
 ## Getting Started
 
